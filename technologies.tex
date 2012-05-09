@@ -22,7 +22,7 @@ Before it would be worth mentioning that by using HTML5 there is increased chanc
 
 Can be this problem solved in a more elegant manner? Is there any solution that would bring bring the new features to users with old browsers? That depends on what feature it is. For example, if the browser doesn’t support WebSockets (which is a real situation – Android web browser doesn’t support it.), then the push notifications should be disabled, but the application should work without them. That is of course the case if the application is not completely based on WebSockets. Atmosphere applies this concept of graceful degradation: If the WebSocket support is not present, it simply won’t be used, but the application will still work through the REST interface as normal.
 
-That was an example of degradeable feature, there are more fundamental ones that simply require support. In that case there is no other solution than demanding user to upgrade their browser.
+That was an example of degradable feature, there are more fundamental ones that simply require support. In that case there is no other solution than demanding user to upgrade their browser.
 
 Another interesting solution is to bundle the application along with a modern browser and distribute it as a desktop application.
 
@@ -104,7 +104,7 @@ WebSockets are most commonly used in web browsers, but not limited to. There are
 
 The server part can be written in any language. There are servers written in Ruby, PHP, Java and others. But there is one server side environment that is favorite amongst many developers who use WebSockets. It’s Node.js, the environment that uses JavaScript as server language. Thanks to Node.js it’s possible to write server and client side for WebSockets in the same language with very similar API.  
 
-WebSockets are supported in all current version of browsers. For Atmosphere, that would suffice, because the application can work without WebSockets, it would gracefuly degrade to work without notifications. There are of course countless web applications that are based on WebSockets, that couldn’t work without them. There’s a library for this very purpose: Socket.IO. \citep{socketio}
+WebSockets are supported in all current version of browsers. For Atmosphere, that would suffice, because the application can work without WebSockets, it would gracefully degrade to work without notifications. There are of course countless web applications that are based on WebSockets, that couldn’t work without them. There’s a library for this very purpose: Socket.IO. \citep{socketio}
 
 \begin{quotation}
 Socket.IO aims to make realtime apps possible in every browser and mobile device, blurring the differences between the different transport mechanisms. It's care-free realtime 100\% in JavaScript. \citep{socketio}

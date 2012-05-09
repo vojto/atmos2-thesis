@@ -26,7 +26,7 @@ An asynchronous interface gives immediate response, processing is done in the ba
 
 The first step to achieve an asynchronous interface is storing some of the application data locally.
 
-First, let's describe a situation of fetching a set of objects as depicted in Figure \ref{fig:1}. When user tries to access a set of objects, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item1.png}} the application will first attempt to retrieve them from local storage, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item2.png}} which is an instant operation. User is provided with some data in zero time.
+Figure \ref{fig:1} presents a situation of fetching a set of objects. When user tries to access a set of objects, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item1.png}} the application will first attempt to retrieve them from local storage, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item2.png}} which is an instant operation. User is provided with some data in zero time.
 
 And the same time the application makes a network request to retrieve the newest data. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item3.png}} When the data is retrieved from the server, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item4.png}} Atmosphere will look at their unique identifiers and try to find an existing copy in the local storage. If the object is found, its attributes are updated and it’s saved back to the local storage. If it’s not, a new object is created locally. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item5.png}}
 
@@ -78,7 +78,7 @@ Always storing data locally whenever a new object is created might be harmful in
 
 For example a web commerce site might provide actions for adding products to the cart, and it might provide an action for submitting the order.
 
-The programmer would probably decide to let Atmosphere manage creation of cart item object, but for order submission, they would probably want to make sure the order was submitted before updating user interface, possibly risking the user would close the window thinking they’re order was submitted while it was not.
+The programmer would probably decide to let Atmosphere manage creation of cart item object. But for order submission, it is better to block user interface, because users want to be sure everything worked. Doing such operation in the background might also lead users into thinking their order was submitted while it wasn't.
 
 For this purpose, Atmosphere implementations provide a way to create or update an object using a synchronous (in terms of user interface blocking) request. 
 
@@ -94,13 +94,21 @@ Another reason to use local storage and synchronization is that the application 
 
 \subsubsection{Notifications}
 
-Atmosphere supports a notification system used for realtime updating of objects. This component is used by the server application using simple HTTP API. There are two types of notifications.
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=3in]{figures/Notifications.png}
+  \caption{Types of Atmosphere notifications}
+  \label{fig:figures_NotificationServer}
+\end{figure}
 
-The first one is „object update“ type. The application server can send this  message to Atmosphere’s notification server to send live object update to connected clients. Such message should contain object’s attributes and list of users to send the notification to. Sending the „object update“ message will cause connected clients to update their local object with the new attributes sent by the server. Using bindings or some other technique, the user interface is updated and user sees the new attributes in real time.
 
-The second type is „notification“ type. This message is also sent by the server, but instead of object attributes it contains a custom object to be passed to the connected clients. It also contains list of clients to send this message to. 
+Atmosphere provides a WebSocket-based notification system for realtime updating of objects. The source application can use this system by making HTTP request to the Atmosphere notification server. (More detailed description is in section \ref{sec:notification_server}.) There are two types of notifications.
 
-A „notification“ message will simply forward custom object to specified users. The client application is responsible for parsing and processing such message, Atmosphere will only provide a way for application to subscribe for these the notification messages. 
+The first type is called \textbf{object update}. It's used to propagate an object update to a subset of connected clients. Such message contains object's attributes and list of users to send the notification to. Sending the object update message will cause connected clients to update their local object with the new attributes sent by the server. Using bindings or some other technique, the user interface is updated and user sees the new attributes in real time.
+
+The second type is called \textbf{notification}. A notification contains custom object to be passed to the connected clients. Similarly, it contains list of clients to send the message to. 
+
+A notification message will forward custom object to specified users. The client application is responsible for parsing and processing such message. Atmosphere provides a way for application to subscribe to these notifications.
 
 \subsection{Components}
 
@@ -145,6 +153,7 @@ Once the server is available and its methods are known, the client must be confi
 The communication between client and the REST source is then performed using HTTP methods.
 
 \subsubsection{Notification server}
+\label{sec:notification_server}
 
 \begin{figure}[ht!]
 \centering
