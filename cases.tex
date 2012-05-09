@@ -30,3 +30,55 @@ The Google Tasks API also returns JSON in a slightly more complicated format. Fo
 
 \subsection{Edukit}
 
+% \begin{figure}[htbp]
+%   \centering
+%     \includegraphics[height=3in]{Edukit.png}
+%   \caption{The marketing diagram describing Edukit}
+%   \label{fig:figures_Edukit}
+% \end{figure}
+
+Edukit is a data sharing platform intended for students. It features simple wiki-like pages, discussions and notifications. It helps students share and discuss knowledge. 
+
+One of its key strengths is ease of use, the social aspect and the speed. Edukit is a very fast web application because of its minimal nature. But generating a new page with each action and delivering it to user can only be so fast. By using Atmosphere it was possible to go even further and make the application feel like a desktop application that provides instant response to almost every action made by user. 
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[height=3in]{EdukitScreen.png}
+  \caption{Screenshot of Edukit showing list of topics in a course}
+  \label{fig:figures_EdukitScreen}
+\end{figure}
+
+The new version of Edukit uses Spine.js and Atmosphere to create fully client-side web application, which stores data locally into the local storage of browser.
+
+Atmoshere synchronizes these local data with the REST API of the original Edukit in the background. There are no changes in the original application involved, only exposing the REST API. The result is that it is possible to use both applications, the old and the new one at the same time.
+
+\subsubsection{Real-time updates}
+
+Edukit also utilizes the real-time notification server provided by Atmosphere as pictured in Figure \ref{fig:figures_EdukitMessages}. When a user creates a new message, a request is made against the original API written in Ruby. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item1.png}} The Ruby application collects information about the newly created message: its sender, contents and intended recipients. (All users that are in the course.) This information is then sent to Atmosphere notification server. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item2.png}} Atmosphere server now forwards the notification to clients connected via WebSocket. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item3.png}}
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[height=2.5in]{figures/EdukitMessages.png}
+  \caption{Posting messages with real-time updates in Edukit}
+  \label{fig:figures_EdukitMessages}
+\end{figure}
+
+
+Since the Ruby application and the live notification server are running on the same machine, and the Atmosphere server is written in Node.js, there is almost no extra processing time for the original request. The result is ability to chat in real time with other users who are currently viewing the same topic.
+
+\subsection{Zone}
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[height=2.5in]{figures/ZoneDiagram.png}
+  \caption{Components of Zone}
+  \label{fig:figures_ZoneDiagram}
+\end{figure}
+
+Zone is an application for Mac that allows simple time tracking. At its first iteration the mission was to help people focus on their work by "zoning in", which would make the toolbar icon purple, reminding user they're working.
+
+At later iterations, a new feature was added: Overview of previous zones throughout the week. This feature would help users find their productive time of the day by letting them visualize how long they were able to focus without taking a break.
+
+The last iteration added synchronization with a web service. Its web interface allows viewing zones, exporting them into PDF and generating invoices. The last iteration utilizes Atmosphere's Cocoa client library to synchronize local data about zones with the web interface.
+
+

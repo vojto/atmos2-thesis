@@ -4,43 +4,47 @@
 
 This chapter describes the high level design of Atmosphere platform, while the implementation details are described in later chapters. 
 
-So far we’ve discussed the current state of SaaS client applications and their problems. We’ve come to the conclusion that the biggest issue with all client applications is that they block user interfaces with network requests. 
+So far we’ve come to the conclusion that of of the issues of client applications is that they block user interfaces with network requests.
 
 \subsubsection{Asynchronous interfaces}
 
-This section defines the term asynchronous user interface.
+This section defines the term asynchronous user interface. \citep{maccaw_async}
 
-In computer science, an asynchronous operation is such one, that doesn’t block the caller while being processed, but instead calls specified callback, or a delegate method, when completed.
+In computer science, an asynchronous operation is such one, that doesn’t block the caller while being processed, instead it returns immediately. It can be passed a callback that is called when the processing is finished.
 
-Asynchronous interface is what we get by applying the same concept to users and interfaces. Users don’t want to be “blocked” (that means stare at the ‘loading’ title next to the spinning wheel) while their actions are being processed.
+Asynchronous interface is the result of applying the same concept to users and interfaces. The idea is to minimize amount of interface blocking. (Displaying some graphic that informs user the program is doing some work.)
 
-Asynchronous interface gives immediate response, and when processing is finished, it might present further results if needed.
-
-The idea of asynchronous interface is well described in the article „Asynchronous Uis – the future of web user interfaces“ \citep{maccaw_async}
+An asynchronous interface gives immediate response, processing is done in the background and as soon as it's finished, the interface might present further results if needed.
 
 \subsubsection{Local Storage}
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=400pt]{LocalStorage1.png}
+\includegraphics[width=350pt]{LocalStorage1.png}
 \caption{Fetching objects using Atmosphere \label{fig:1}}
 \end{figure}
 
-Storing the data locally will help achieving an asynchronous interface. 
+The first step to achieve an asynchronous interface is storing some of the application data locally.
 
-When user tries to access a set of objects, the application will first retrieve them from local storage, and then make a network request to retrieve the newest data. As soon as the data is retrieved from the server, Atmosphere will look at their unique identifiers and try to find an existing copy in the local storage. If the object is found, its attributes are updated and it’s saved back to the local storage. If it’s not, a new object is created locally.
+First, let's describe a situation of fetching a set of objects as depicted in Figure \ref{fig:1}. When user tries to access a set of objects, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item1.png}} the application will first attempt to retrieve them from local storage, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item2.png}} which is an instant operation. User is provided with some data in zero time.
 
-The interface always displays local data. Using model-view bindings the interface is automatically updated whenever a change in local objects is made.
+And the same time the application makes a network request to retrieve the newest data. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item3.png}} When the data is retrieved from the server, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item4.png}} Atmosphere will look at their unique identifiers and try to find an existing copy in the local storage. If the object is found, its attributes are updated and it’s saved back to the local storage. If it’s not, a new object is created locally. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item5.png}}
+
+The user interface is bound to the local data. When new local data are saved, it's automatically updated to reflect current local data. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item6.png}}
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=400pt]{LocalStorage2.png}
+\includegraphics[width=350pt]{LocalStorage2.png}
 \caption{Creating objects using Atmosphere \label{fig:2}}
 \end{figure}
 
-It works similarly the other way. When user creates a new object, or updates an existing object, the changes are immediately written to the local storage. At the same moment the object is marked as “changed locally”, and is scheduled for synchronization. The synchronization module picks it up, and sends it to the server.
+For making changes the objects, the workflow is similar, depicted in Figure \ref{fig:2}.
 
-Another important part of this process is deciding whether to send a “create” request or “update” request. For each object, Atmosphere keeps track of Boolean information “is local only”, which is set to true the first time object is created. At that point the object is assigned a temporary ID. When the object is successfully synchronized, it’s ID is updated to permanent ID assigned by the server and the value of “is local only” is set to false.
+When user makes changes to an object, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item1.png}} the changes are immediately written to the local storage. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item2.png}} This operation is instant, so user sees response without any blocking. Now the object is marked as 'changed locally', which schedules it for synchronization. The synchronization module picks it up, and sends it to the server. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item3.png}} The rest of the process works in the same way as with fetching objects.
+
+Since the REST services have different actions for creating new objects and updating existing ones, it's important to decide whether to send a 'create' or an 'update' request. For this purpose Atmosphere keeps track of boolean information which indicates whether the object is 'local only'. This value is set true at the first time object is created, and is changed to false once confirmation about creation is received from the server.
+
+Also, local objects need to be identified somehow. When an object is created locally, it's assigned a temporary identifier in form of UUID. Once it's succesfuly created remotely, the identifier is updated to permanent identifier assigned by the server.
 
 \subsubsection{Recovering from failure}
 
