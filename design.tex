@@ -47,14 +47,30 @@ Since the REST services have different actions for creating new objects and upda
 Also, local objects need to be identified somehow. When an object is created locally, it's assigned a temporary identifier in form of UUID. Once it's succesfuly created remotely, the identifier is updated to permanent identifier assigned by the server.
 
 \subsubsection{Recovering from failure}
+\label{sec:failure_recovery}
 
-Network connection might be very unreliable in some cases. This problem is partly solved by keeping track of objects, which are local only. If the request is made, and it never comes back, the object is never unmarked as “local only” and the next synchronization cycle another create request is sent. 
+Synchronization relies on network requests and network connection might be very unreliable at times. Also we have to consider that many of Atmosphere-based applications are developed especially for mobile devices and mobile connection is even less reliable.
 
-A case that is not solved yet is the one when the network request is made, processed by the server, but the response never makes it back to the client. In such case the object is created remotely, but the client application isn’t informed about this: thus it tries to create the object again, which results in two objects of the same attributes.
+The case of fetching objects doesn't require much attention. If objects fail to load, user simply won't see them. A notification about network failure can be displayed, but this is responsibility of application logic.
 
-Assigning permanent ID on the client side could solve this problem. Such solution would expect server to take ID as an argument to the create request. If such solution was in place, the previous case could be described as follows: A new object is created on the client side, it is assigned a temporary ID. Then it is sent to the server and server creates object with that ID. The response never comes back to the client, so client makes another create request, with the same ID. Server declines to create another object with the same ID, so it returns a confirmation message for existing object. This time client receives the confirmation message, so the object is marked as not local only. 
+Let's consider a case of saving objects. Atmosphere is designed in a way that it will always create a local object first. If the remote request fails, the local object exists, but the remote doesn't.
 
-This solution is not implemented by Atmosphere because it would be implemented on the server side. Fortunately, it can be implemented very easily by adding very little code on the server side, and even less code on the server side. 
+This problem is partly solved by keeping track of which objects are 'local only'. (See Figure \ref{fig:recovery1}.) Every object is marked as 'local only' for as long as its existence wasn't confirmed by the server. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item1.png}} If one request fails, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item2.png}} the 'local only' mark remains on object, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item3.png}} and the synchronization is attempted in the next cycle. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item4.png}}
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[height=2in]{Recovery1.png}
+  \caption{Recovery from failure by keeping track of local objects}
+  \label{fig:recovery1}
+\end{figure}
+
+A more complicated situation is when the network request is made, processed by the server (therefore the object is created), but the response never makes it back to the client. The object is created remotely, but the client application isn’t informed about this, so it never removes the 'local only' mark. Then it tries to create the object again, because the mark wasn't removed and that results in two objects of the same attributes being created.
+
+A possible solution is assigning permanent ID on the client side. Such solution would expect server to take ID as an argument to the create request.
+
+Now a new object is created on the client side, it is assigned a temporary ID. Then it is sent to the server and server creates object with that ID. The response never comes back to the client, so client makes another create request, with the same ID. Server declines to create another object with the same ID, so it returns a confirmation message for existing object. This time client receives the confirmation message, so the object is marked as not local only.
+
+This solution is not implemented by Atmosphere because it takes server side logic and Atmosphere is purely client-side framework. Implementing such a solution in fact takes only minor modification on server side, and is implemented by Edukit, as described in section \ref{sec:edukit}.
 
 \subsubsection{Exceptions}
 

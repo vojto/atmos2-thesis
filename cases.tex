@@ -29,6 +29,7 @@ Atmosphere provides a method for sending custom HTTP header with each request. T
 The Google Tasks API also returns JSON in a slightly more complicated format. For this reason, Atmoshere allows configuration of the way data are extracted from the response.
 
 \subsection{Edukit}
+\label{sec:edukit}
 
 % \begin{figure}[htbp]
 %   \centering
@@ -65,6 +66,14 @@ Edukit also utilizes the real-time notification server provided by Atmosphere as
 
 
 Since the Ruby application and the live notification server are running on the same machine, and the Atmosphere server is written in Node.js, there is almost no extra processing time for the original request. The result is ability to chat in real time with other users who are currently viewing the same topic.
+
+\subsubsection{Failure recovery by using UUIDs}
+
+Edukit implements failure recovery (see section \ref{sec:failure_recovery}) by using same object identifiers on both client and server side.
+
+When a local object is created, it's assigned a new UUID. When it's synchronized, the server creates it in the database, and sets it's identifier to the one created on the client side.
+
+This helps prevent the case of one local object being created two times on the server side in case of network failure. This situation can never happen, because server uses client identifier to create remote object, so if an object with same identifier already exists, it will simply return that object instead of creating a new one.
 
 \subsection{Zone}
 
