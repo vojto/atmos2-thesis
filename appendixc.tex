@@ -1,0 +1,29 @@
+\section*{Appendix C}
+\addcontentsline{toc}{section}{\numberline{}Appendix C}
+%\appendix
+%\section{Príloha}
+\subsection*{Vytvorenie zoznamu skratiek a symbolov}
+
+Ak sú v~práci skratky a symboly, vytvára sa {\it Zoznam skratiek
+a~symbolov} ({\it List of Symbols and Abbreviations}) a~ich
+dešifrovanie. V~prostredí \LaTeX{}u sa takýto zoznam ľahko vytvorí
+pomocou balíka \verb+nomencl+. Postup je nasledovný:
+\begin{enumerate}
+\item Do preambuly zapíšeme nasledujúce príkazy\\
+\verb+\usepackage[noprefix]{nomencl}+\\ \verb+\makeglossary+
+\item  V~mieste, kde má byť\/ vložený zoznam zapíšeme príkaz\\
+\verb+\printglossary+
+\item V miestach, kde sa vyskytujú skratky a symboly ich definíciu
+zavedieme, napr. ako v~našom texte, príkazmi\\
+\verb+\nomenclature{$\upmu$}{mikro, $10^{-6}$}+\\
+\verb+\nomenclature{V}{volt, základná jednotka napätia v sústave SI}+\\
+a~dokument \uv{pre\LaTeX{}ujeme}.
+\item Z~príkazového riadka spustíme program \verb+makeindex+
+s~prepínačmi podľa použitého operačného systému, napr.~pre OS GNU/Linux
+a~distribúciu~Ubuntu~$6.06$~LTS s~verziou \verb+tetex 3.0-15ubuntu1+
+napíšeme:\\
+\verb*+makeindex tukethesis.glo -s nomencl.ist -o tukethesis.gls+
+\item Po opätovnom \uv{pre\LaTeX{}ovaní} dokumentu sa na
+požadované miesto vloží {\it Zoznam skratiek a symbolov} ({\it List
+of Symbols and Abbreviations}).
+\end{enumerate}

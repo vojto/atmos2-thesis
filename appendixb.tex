@@ -1,0 +1,125 @@
+\section*{Appendix B}
+\addcontentsline{toc}{section}{\numberline{}Appendix B}
+%\appendix
+%\section{Príloha}
+\subsection*{Bibliografick\'e odkazy}
+
+Táto časť\/ záverečnej práce je povinná. V~zozname použitej literatúry
+sa uvádzajú odkazy podľa normy STN ISO 690--2 (01 0197) (Informácie
+a~dokumentácia. Bibliografické citácie. Časť\/ 2: Elektronické
+dokumenty alebo ich časti, dátum vydania 1.~12.~2001, ICS: 01.140.20).
+Odkazy sa môžu týkať\/ knižných, časopiseckých a~iných zdrojov
+informácií (zborníky z~konferencií, patentové dokumenty, normy,
+odporúčania, kvalifikačné práce, osobná korešpondencia a~rukopisy,
+odkazy cez sprostredkujúci zdroj, elektronické publikácie), ktoré boli
+v~záverečnej práci použité.
+
+Forma citácií sa zabezpečuje niektorou z~metód, opísaných v~norme STN
+ISO 690, 1998, s.~21. Podrobnejšie informácie nájdete na stránke
+\texttt{http://www.tuke.sk/anta/} v~záložke {\small\sf Výsledky
+práce/Prehľad normy pre publikovanie STN ISO 690 a~STN ISO 690-2}.
+
+Existujú dva hlavné spôsoby citovania v~texte.
+
+\begin{itemize}
+\item Citovanie podľa mena a~dátumu.
+\item Citovanie podľa odkazového čísla.
+\end{itemize}
+
+\emph{Preferovanou metódou citovania} v~texte vysokoškolskej
+a~kvalifikačnej práce je podľa normy ISO 7144 citovanie podľa mena
+a~dátumu \citep{kat,gonda}. V~tomto prípade sa zoznam použitej
+literatúry upraví tak, že za meno sa pridá rok vydania. Na uľahčenie
+vyhľadávania citácií sa zoznam vytvára v~abecednom poradí autorov.
+
+\medskip
+
+Príklad:
+\dots podľa \citep{steinerova} je táto metóda dostatočne rozpracovaná
+na to, aby mohla byť\/ všeobecne používaná v~\dots
+
+\medskip
+
+Druhý spôsob uvedenia odkazu na použitú literatúru je uvedenie len
+čísla tohto zdroja v~hranatých zátvorkách bez mena autora (autorov)
+najčastejšie na konci príslušnej vety alebo odstavca.
+
+\medskip
+
+Príklad:
+\dots podľa [13] je táto metóda dostatočne rozpracovaná na to, aby
+mohla byť\/ všeobecne používaná v~\dots ako je uvedené v~[14].
+
+\medskip
+
+Citácie sú spojené s~bibliografickým odkazom poradovým číslom v~tvare
+indexu alebo čísla v~hranatých zátvorkách. Odkazy v~zozname na konci
+práce budú usporiadané podľa týchto poradových čísel. Viacero citácií
+toho istého diela bude mať\/ rovnaké číslo. Odporúča sa usporiadať\/
+jednotlivé položky v~poradí citovania alebo podľa abecedy.
+
+\medskip
+\noindent
+Rôzne spôsoby odkazov je možné dosiahnuť\/ zmenou voľby v~balíku
+\verb+natbib+:
+
+\noindent
+\verb+% Citovanie podla mena autora a roku+\\
+\verb+\usepackage[]{natbib}\citestyle{chicago}+\\
+\verb+% Možnosť rôznych štýlov citácií. Príklady sú uvedené+\\
+\verb+% v preambule súboru natbib.sty.+\\
+\verb+% Napr. štýly chicago, egs, pass, anngeo, nlinproc produkujú+\\
+\verb+% odkaz v tvare (Jones, 1961; Baker, 1952). V prípade, keď+\\
+\verb+% neuvedieme štýl citácie (vynecháme \citestyle{}) v "options"+\\
+\verb+% balíka natbib zapíšeme voľbu "colon".+
+
+\medskip
+\noindent
+Keď zapneme voľbu \verb+numbers+, prepneme sa do režimu citovania
+podľa odkazového čísla.
+
+\noindent
+\verb+% Metoda ciselnych citacii+\\
+\verb+\usepackage[numbers]{natbib}+
+
+\bigskip
+
+Pri zápise odkazov sa používajú nasledujúce pravidlá:
+
+V~odkaze na knižnú publikáciu (pozri príklad zoznamov na konci tejto
+časti):
+\begin{itemize}
+\item Uvádzame jedno, dve alebo tri prvé mená oddelené pomlčkou,
+ostatné vynecháme a~namiesto nich napíšeme skratku et al. alebo a~i.
+\item Podnázov sa môže zapísať\/ vtedy, ak to uľahčí identifikáciu
+dokumentu. Od názvu sa oddeľuje dvojbodkou a~medzerou.
+\item Dlhý názov sa môže skrátiť\/ v~prípade, ak sa tým nestratí
+podstatná informácia. Nikdy sa neskracuje začiatok názvu. Všetky
+vynechávky treba označiť\/ znamienkami vypustenia  \uv{\dots}
+\end{itemize}
+
+Pri využívaní informácií z~elektronických dokumentov  treba
+dodržiavať\/ tieto zásady:
+\begin{itemize}
+\item  uprednostňujeme autorizované súbory solídnych služieb
+a~systémov,
+\item zaznamenáme dostatok informácií o~súbore tak, aby ho bolo opäť\/
+možné vyhľadať\/,
+\item urobíme si kópiu použitého prameňa v~elektronickej alebo
+papierovej forme,
+\item za verifikovateľnosť\/ informácií zodpovedá autor, ktorý sa na
+ne odvoláva.
+\end{itemize}
+
+Pre zápis elektronických dokumentov platia tie isté pravidlá, ako pre
+zápis \uv{klasických}. Navyše treba uviesť\/ tieto údaje:
+\begin{itemize}
+\item  druh nosiča  [online], [CD-ROM], [disketa], [magnetická páska]
+\item dátum citovania  (len pre online dokumenty)
+\item dostupnosť\/  (len pre online dokumenty)
+\end{itemize}
+
+Poradie prvkov odkazu je nasledovné:
+Autor. Názov. In Názov primárneho zdroja: Podnázov. [Druh  nosiča].
+Editor. Vydanie alebo verzia. Miesto vydania : Vydavateľ, dátum
+vydania. [Dátum citovania]. Poznámky.  Dostupnosť\/. ISBN alebo ISSN.
