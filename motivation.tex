@@ -2,11 +2,11 @@
 
 During the last couple of years a lot of software has migrated from desktop application to web applications.
 
-Many tasks can be now performed using only the web browser. A project called Chromebook \ref{chromebook} introduced a laptop which contains only a web browser and all the work is done using web applications.
+Many tasks can be now performed using only the web browser. A project called Chromebook \citep{chromebook} introduced a laptop which contains only a web browser and all the work is done using web applications.
 
-That makes development and use of software better in many ways: Web applications are faster to implement, it’s easy to customize interfaces, there is no such thing as software updates anymore, and the data is stored and processed by the server.
+That makes development and use of software better in many ways: Web applications are faster to implement, it’s easy to customize interfaces, there is no such thing as software updates anymore, and the data are stored and processed by the server.
 
-Data being stored on the server are safer, but also it allows sharing of data and communication.
+When the data are stored on the server, they are stored more safely than on user's hard drive. It also allows data sharing and communication between users.
 
 \subsection{Client applications}
 
@@ -16,21 +16,25 @@ Data being stored on the server are safer, but also it allows sharing of data an
 \caption{Diagram of clients in cloud architecture \label{fig:1}}
 \end{figure}
 
-Client is the computer hardware that is responsible for accessing the cloud. Application is what is provided by the cloud service. The definition of SaaS implies, that user should be able to use the application by signing up for the service, which is in most cases possible, because applications are delivered through the web.
+In the cloud architecture, client is the device that connects to cloud. Client application is software that runs on client and communicates with the cloud service. In SaaS, the client application is often delivered in form of web application: User can access it using their browser.
 
-However, in some cases further installation is required. For example, on iPhone platform, web applications are limited, they can’t access some hardware features such as camera. If the cloud application would require taking pictures, application would have to be installed through the App Store, which is installation of software.
+However, a web application isn't always sufficient. For example, on iPhone platform, web applications are limited, they can’t access some hardware features such as camera. Native applications support these features, and those can be installed via App Store. So the client application can be a website, or it can be a native application that requires installation.
  	
-For SaaS, if native client application is required, it’s usually free: The business model around SaaS is to charge user for using the service, not for installing software. This is still SaaS, because user can freely download the client application and any upgrades, but it will render useless unless they subscribe to the service.  
-	
-The goal of Atmosphere is to improve these client applications, but first it's needed to take a look at the current state and find out what exactly needs improving.
+In SaaS the native applications are usually free: The SaaS business model is to charge  for using the service, not for installing software. If user downloads the free application, but are not subscribed to the service, they won't be able to get past the login screen. 
+
+Atmosphere tries to improve these client applications and make their development faster. The next sections will discuss the current state of client applications.
 
 \subsubsection{Desktop applications}
 
-The biggest issue with desktop applications is that they are missing. Classic desktop applications have their place: It’s the once that do a little networking and can be hardly called SaaS. But SaaS seem to choose to build web application instead of desktop applications.
+With SaaS becoming a popular model for software business, companies started focusing less on desktop applications and more on web applications.
 
-They actually have a good reason to do so: Desktop applications require a lot more work, especially when they should run on all platforms. In most cases it’s probably not worth investing money into building individual applications for every platforms, but it some cases, especially in products that are used frequently, having a desktop applications means much better experience, much less time lost waiting for network request to complete and much higher quality of the software.
+Developing for desktop takes more effort than developing for web, mainly because it's easier to support all platforms when building a web app. For companies it might not be worth building individual application for every platform.
 
-One of the great examples are the social media applications. With millions of users and open API  it is only logical that developers try to improve the experience by building a desktop applications. As for a particular example, Twitter has tens of desktop clients for all Windows, Mac and Linux platforms.
+Still there are some well-known SaaS products that provide a decent desktop application. A good example are the social networks. They have millions of users and they provide an API.
+
+WIP
+
+With millions of users and open API it is only logical that developers try to improve the experience by building a desktop applications. As for a particular example, Twitter has tens of desktop clients for all Windows, Mac and Linux platforms.
 
 It seems that user experience is generally better with desktop application rather than web applications. The first reason is that the user interface is on the client side: That means there are no requests, there is no need for AJAX, only the data is transferred through the network. Some desktop applications even use local storage to cache the local data.
 
