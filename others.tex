@@ -1,3 +1,46 @@
 \section{Other solutions}
 
 During the time of writing many new projects were released. Some of them are very similar to Atmosphere, others target wider range of problems.
+
+
+\subsection{Meteor}
+
+Meteor \citep{meteor} is a whole JavaScript framework for building distributed, real-time JavaScript applications. First of all, it provides the environment for building JavaScript applications. This environment includes automatic template rendering based on model updates.
+
+The problem with this approach is that if the developer already knows a UI framework, such as Spine.js, \citep{spinejs} they can either use Meteor instead, or figure out a way to connect the UI part of their framework and the data part of Meteor.
+
+It provides a database-like API on the client side. Client-side code can manipulate objects in the application directly. Changes made to objects are propagated to other clients automatically in real-time using WebSockets.
+
+The server side is written in Node.js and the documentation \citep{meteor_doc} doesn't mention any means of implementing custom logic on the server side. That, first of all, represents a security risk. The client makes changes directly to database objects. Client is written in JavaScript and since it is not a compiled language, it can be changed by user at any time. Therefore, client can change database objects directly, which can become an issue if application is used by multiple users.
+
+Secondly, using this approach could result in unexpected state of objects in case of network failure. For example, single action may create two interdependent objects. If one of these requests fails, there is one object which depends on another objects, which doesn't exist.
+
+If these two objects were created in a server procedure called using one request, it would assure that either both or none of the objects are created.
+
+Meteor uses MongoDB to store its data. Meteor doesn't provide a library for Cocoa, or any other desktop or mobile platform. It is open-source and its source code is released under MIT license.
+
+\subsection{Firebase}
+
+Firebase \citep{firebase} is a product similar to Meteor. The key difference is that it doesn't provide a whole framework for building JavaScript applications, but only the data layer.
+
+This allows using existing JavaScript applications written in other frameworks and adding Firebase data layer. The data binding is done by attaching callbacks to Firebase data layer. Existing application with its own custom UI logic first attaches a callback to be called when Firebase data changes, and then is notified of changes so it could display the current state.
+
+Another difference between Meteor and Firebase is that Firebase requires users to use their hosting to store the data. It is not open source and it does not provide a way to self-host the data. It is founded by YCombinator \citep{ycombinator} and other angel investors. It also doesn't provide a library for other than web platform.
+
+\subsection{Simperium}
+
+Simperium is a project that is very similar to Firebase. It also doesn't provide a whole JavaScript framework, only data layer.
+
+Similarly to Meteor and Firebase, Simperium provides real-time object synchronization. One very powerful difference is built-in operational transformation. \citep{ot} This allows sending only the portions of data that have changes which improves performance dramatically when dealing one larger objects. Also it adds automatic resolution of conflicts: If two users change one object, their both changes will be preserved.
+
+Simperium also allows writing custom server logic. Programmers have to use the environment provided by Simperium. The server side hosting is still provided by Simperium. It is also founded by YCombinator \citep{ycombinator} and not open-source. 
+
+Simperium also comes with a Cocoa framework for building iOS application. This framework adds feature of caching data for offline use. Interestingly, this feature is not provided for web applications.
+
+\subsection{Comparison with Atmosphere}
+
+Atmosphere is very similar to Simperium by a few key points: It provides custom server logic, real-time synchronization, Cocoa library and an option for offline usage.
+
+It is still very different from these frameworks in one aspect: It allows building applications that utilize and existing application with it's REST API. All of the frameworks mentioned here require a whole new server-side application practically making developers rewrite their server code from scratch. (Or in worse case skip writing the server code.) Atmosphere is also open-source.
+
+Because of this design decision Atmosphere cannot bring some features such as operational transformation for live editing. It would be impossible to implement it without drastically changing server code, which is one of the strong points of Atmosphere: It allows building real-time application with minimal change at the server side.
