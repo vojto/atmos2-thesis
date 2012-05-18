@@ -110,6 +110,16 @@ The second type is called \textbf{notification}. A notification contains custom 
 
 A notification message will forward custom object to specified users. The client application is responsible for parsing and processing such message. Atmosphere provides a way for application to subscribe to these notifications.
 
+\subsubsection{Live updates}
+
+Notifications themselves don't suffice in all cases. Take as an example an application where multiple users would like to edit one page together. Once a change is made by one user, a notification could be sent to other users containing the whole page object.
+
+What happens if a page is very long? Sending the whole object would be infeasible. The solution for this problem is to send only the changes made, not the whole objects.
+
+Doing that requires further processing on the server side, to avoid conflicts. This processing can be done using operational transformation. \citep{ot} Since the processing has to happen on the server side, a custom server logic is required. Adding custom server logic is unfortunately not possible for Atmosphere, because one of the design decisions was to support custom REST servers.
+
+This issue could be solved in future by developing a custom extendable Atmosphere server, with support for operational transformation.
+
 \subsection{Components}
 
 \subsubsection{Client}
