@@ -68,9 +68,6 @@ pdfauthor={Vojtech Riník},
 pdfsubject={Bachelor's Thesis}
 } 
 
-\setlength{\parindent}{1cm} 
-\setlength{\parskip}{0cm}
-
 %% -----------------------------------------------------------------
 %% START YOUR THESIS
 %% -----------------------------------------------------------------
@@ -78,7 +75,7 @@ pdfsubject={Bachelor's Thesis}
 %% PLEASE SELECT YOUR PREFERED THESIS TYPE
 %%
 %% A Bachelor's degree is a first degree at college or university
-\bachelorthesis{Bachelor's Thesis}
+\bachelorthesis{Appendix A: Developer's guide}
 %%
 %% A Master's thesis is a second level college or university degree
 %\masterthesis{Master's Thesis}
@@ -116,137 +113,15 @@ pdfsubject={Bachelor's Thesis}
 %% input the 'Title page of the Thesis'
 \titlepage
 
-%% input the 'Metadatasheet of the Thesis'
-%\metadatasheet
-
-% \errata % begin the 'Errata' 
-% Ak je potrebné, autor na tomto mieste opraví chyby, ktoré našiel
-% po vytlačení práce. Opravy sa uvádzajú takým písmom, akým je napísaná
-% práca. Ak zistíme chyby až po vytlačení a zviazaní práce, napíšeme
-% erráta na samostatný lístok, ktorý vložíme na toto miesto. Najlepšie je
-% lístok prilepiť\/ \citep{kat}.
-% 
-% Forma:
-% 
-% \tabcolsep=10pt
-% \begin{table}[!hb]
-%   \centering
-%   \begin{tabular}{|c|c|c|c|}\hline
-% Strana & Riadok & Chybne & Správne \\\hline\hline
-% 12 & 6 & publikácia & prezentácia \\\hline
-% 22 & 23 & internet & intranet \\\hline
-% & & & \\\hline
-% & & & \\\hline
-%   \end{tabular}
-% \end{table}
-% \kerrata
-
-\abstrakte % Abstract in English
-abstrakt anglicky
-\abstrakt % Abstract in Slovak
-TODO: Translate
-\endabstract % end of the Abstracts page
-
-%% input the 'Assign of the Thesis'
-\assignthesis
-
-%% input the 'Declaration' of the author
-\declaration
-% I hereby declare that this thesis is my own work and effort. Where
-% other sources of information have been used, they have been
-% acknowledged.
-%%
-% Niektorí autori metodických príručiek o~záverečných prácach sa
-% nazdávajú, že takéto vyhlásenie je zbytočné, nakoľko povinnosť
-% vypracovať záverečnú prácu samostatne, vyplýva študentovi zo zákona
-% a na  autora práce sa vzťahuje autorský zákon.
-
-\acknowledgement % begin the 'Acknowledgement'
-I would like to thank my supervisor Assoc. Prof. Ing. František Jakab, PhD. and my consultant Ing. Ivan Klimek. 
-\endacknowledgement
-
-\preface % begin the 'Preface'
-The world is online. There is hardly any computer program that doesn’t utilize the global network. 
-
-With most of the data being stored somewhere else we face a new problem: How to deliver this data from the network to user and back again in the most transparent way? The simplest solution is to not hide the networking, and we see that every day browsing the Internet. User navigates to a page, and they wait for it to load, then they interact with it.
-
-Still it seems this problem can be solved, and when it is, it improves the user experience greatly. One example is Google Mail. When user opens Google Mail, the unread messages are downloaded from the server, so when user decides to read them, they can see the contents instantly, with no waiting. 
-
-This thesis describes Atmosphere, a set of software libraries that help to hide networking in a way that Google Mail does. The user perceives such applications as offline applications. In the end, the user experience and productivity is greatly improved. 
-\endpreface
-
-\thispagestyle{empty}
-\tableofcontents
-\newpage
-
-\thispagestyle{empty}
-%\addcontentsline{toc}{section}{\numberline{}List of Figures}
-\listoffigures
-\newpage
-
-\thispagestyle{empty}
-%\addcontentsline{toc}{section}{\numberline{}List of Tables}
-\listoftables
-\newpage
-
-\thispagestyle{empty}
-%\addcontentsline{toc}{section}{\numberline{}List of Symbols and
-%Abbreviations}
-\printglossary % input the 'List of Symbols and Abbreviations'
-\newpage
-
 %\addcontentsline{toc}{section}{\numberline{}List of Therms}
-\listofterms % begin the 'List of Therms'
 
-\begin{description}
-	\item[Dizertácia] je rozsiahla vedecká rozprava, v~ktorej sa na
-základe vedeckého výskumu a~s~použitím (využitím) bohatého dokladového
-materiálu  ako i~vedeckých metód rieši zložitý odborný problém.
-	\item[Font] je súbor, obsahujúci predpisy na zobrazenie textu
-v~danom písme, napr. na tlačiarni. To čo vidíme je písmo; font je súbor
-a~nevidíme ho.
-	\item[Kritika] je odborne vyhrotený, prísny pohľad na hodnotenú
-vec. Medzi recenziou a kritikou je taký pomer ako medzi diskusiou a
-polemikou. Pri kritike treba prísnosť\/ chápať\/ v~tom zmysle, že sa
-v~nej okrem iného navrhuje, ako hodnotené dielo skvalitniť\/.
-	\item[Meter (m)] je vzdialenosť\/, ktorú svetlo vo vákuu prejde
-za časový interval $\nicefrac{1}{299\,792\,458}$~sekundy.
-	\item[Písmom] rozumieme vlastný vzhľad znakov.
-	\item[Problém] termín používaný vo všeobecnom zmysle vo vzťahu
-k~akejkoľvek duševnej aktivite, ktorá má nejaký rozoznateľný cieľ.
-Samotný cieľ nemusí byť\/ v~dohľadne. Problémy možno charakterizovať\/
-tromi rozmermi -- oblasťou, obtiažnosťou a veľkosťou.
-	\item[Proces] je postupnonosť\/ či rad časovo usporiadaných
-udalostí tak, že každá predchádzajúca udalosť\/ sa zúčastňuje na
-determinácii nasledujúcej udalosti.
-\end{description}
-
-\endlistofterms
-%
-\include{introduction}
-%
-\include{background}
-
-\include{motivation}
-
-\include{technologies}
-
-\include{design}
-
-\include{implementation}
-
-\include{cases}
-
-\include{others}
+\setlength{\parindent}{1cm} 
+\setlength{\parskip}{0cm}
 
 %
-%\include{analytical}
 %
-%\include{mainpart}
+\include{mainpart}
 %
-\include{conclusion}
-
-\include{bibliography}
 %
 % \ititnclude{appendixc}
 %% begin the 'Curriculumvitae' of the author
