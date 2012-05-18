@@ -1,0 +1,136 @@
+\nonstopmode
+
+\documentclass[]{tukethesis}
+%% -----------------------------------------------------------------
+%% UTF-8 ENCODING USED. USE PDFLATEX TO COMPILE YOUR DOCUMENTS.
+%% -----------------------------------------------------------------
+\usepackage{listings}
+\usepackage{courier}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{framextopmargin=50pt,frame=bottomline,captionpos=b}
+\usepackage[slovak,english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{cmap}
+%% ---- definicia slovenskych uvodzoviek
+\chardef\clqq=18 \sfcode18=0
+\chardef\crqq=16 \sfcode16=0
+\def\uv#1{\clqq#1\crqq}
+%% ------------------------------------
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tab.}
+\renewcommand{\refname}{Bibliography}
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\listtablename}{List of Tables}
+\renewcommand{\contentsname}{Contents}
+%%
+\usepackage{latexsym}
+\usepackage{dcolumn} % alignment on a 'decimal point' in tabular mode
+\usepackage{hhline}
+\usepackage{amsmath}
+\usepackage{nicefrac} % nice fractions
+\usepackage{upgreek} % e.g. $\upmu\mathrm{m}$ type micrometer (mu)
+\usepackage[final]{showkeys}%color%notref%notcite%final
+\usepackage[noprefix]{nomencl}
+\usepackage{verbatim}
+\makeglossary % command to make *.glo file
+% \usepackage{parskip}
+\usepackage{indentfirst}
+% \usepackage{listings}
+
+\usepackage{caption}
+\captionsetup[lstlisting]{font={bf,footnotesize}}
+\captionsetup[figure]{font={bf,footnotesize}}
+%%
+%\usepackage[dvips]{graphicx}
+%\DeclareGraphicsExtensions{.eps, .mps}
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.mps}
+% \graphicspath{{figures/}} % directory for figures
+%%
+%% numerical citations (vancouer style)
+\usepackage[numbers]{natbib}
+%%
+%% author-year citations (harvard style) -- prefered !!!
+%\usepackage{natbib} \citestyle{chicago}
+% -----------------------------------------------------------------
+%% tlač !!!
+\usepackage[pdftex,unicode=true,bookmarksnumbered=true,
+bookmarksopen=true,pdfmenubar=true,pdfview=Fit,linktocpage=true,
+pageanchor=true,bookmarkstype=toc,pdfpagemode=UseOutlines,
+pdfstartpage=1]{hyperref}
+\hypersetup{%
+baseurl={http://www.tuke.sk/sevcovic},
+pdfcreator={pdfLaTeX},
+pdfkeywords={Optimization, thesis, writing},
+pdftitle={The Optimization of the Thesis Writing},
+pdfauthor={Vojtech Riník},
+pdfsubject={Bachelor's Thesis}
+} 
+
+%% -----------------------------------------------------------------
+%% START YOUR THESIS
+%% -----------------------------------------------------------------
+%%
+%% PLEASE SELECT YOUR PREFERED THESIS TYPE
+%%
+%% A Bachelor's degree is a first degree at college or university
+\bachelorthesis{Appendix B: System guide}
+%%
+%% A Master's thesis is a second level college or university degree
+%\masterthesis{Master's Thesis}
+%% -----------------------------------------------------------------
+%% Ak praca nema 'podnazov' zakomentujte riadky \subtitle a \podnazov, 
+%% alebo polozky nechajte prazdne
+\author{Vojtech Riník}
+\title{Atmosphere: Concurrency enabled data synchronization platform with HTML5/JS and Cocoa clients}
+\subtitle{}
+\abstrakte{This thesis describes Atmosphere, a platform that improves user experience of web, mobile and desktop applications by storing remote objects in local database. The first chapters describe the background and state of existing solutions. Next chapters focus on available technologies that could be employed. With this knowledge the thesis proposes a design for the platform. The implementations are described in detail in the next chapter including example applications. The thesis is concluded by comparing Atmosphere to other projects.}
+\keywords{Web applications, Cocoa, Synchronization, Real-time applications}
+\degree{Bachelor}
+\university{Technical University of Košice}
+\faculty{Faculty of Electrical Engineering and Informatics}
+\facultyabbr{FEI}
+\department{Department of Computers and Informatics}
+\departmentabbr{KPI}
+\fieldofstudy{9.2.1 Informatics}
+\studyprogramme{Informatics}
+\supervisor{Assoc. Prof. Ing. František Jakab, PhD.}
+\consultanta{Ing. Ivan Klimek}
+% \consultantb{RNDr.~Marián Čierny, DrSc.}
+\dateofsubmission{May. 22. 2012} 
+\town{Košice}
+\abstrakt{Táto práca opisuje Atmosphere, platformu, ktorá zlepšuje používanie internetových aplikácii tým, že vzdialené objekty ukladá v lokálnej pamäti. Prvé kapitoly opisuju pozadie a stav terajších riešení. Ďalšie kapitoly sú zamerané na dostupné technológie, ktoré by mohli byť využité. S týmito znalostiami práca navrhuje štruktúru platformy. Implementácie a ukážkové aplikácie sú detailne popísané v ďalších kapitolách. Práca je zakončená porovnaním Atmosphere a iných projektov.}
+\klucoveslova{Webové aplikácie, Cocoa, Synchronizácia, Aplikácie v reálnom čase}
+
+\begin{document}
+\renewcommand\theHfigure{\theHsection.\arabic{figure}}
+\renewcommand\theHtable{\theHsection.\arabic{table}}
+\bibliographystyle{dcu}
+%% input the 'First page of the Thesis'
+\firstpage
+
+%% input the 'Title page of the Thesis'
+\titlepage
+
+%\addcontentsline{toc}{section}{\numberline{}List of Therms}
+
+% \setlength{\parindent}{1cm} 
+% \setlength{\parskip}{0cm}
+
+%
+%
+\include{mainpart}
+%
+%
+% \ititnclude{appendixc}
+%% begin the 'Curriculumvitae' of the author
+% \curriculumvitae\protect\label{page:posledna}
+% Táto časť\/ je nepovinná. Autor tu môže uviesť\/ svoje biografické
+% údaje, údaje o~záujmoch, účasti na~projektoch, účasti na~súťažiach,
+% získané ocenenia, zahraničné pobyty na~praxi, domácu prax, publikácie
+% a~pod.
+% \endcurriculumvitae
+
+\end{document}
+%%

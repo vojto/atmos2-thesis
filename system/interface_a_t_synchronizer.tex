@@ -1,0 +1,171 @@
+\hypertarget{interface_a_t_synchronizer}{
+\subsubsection{ATSynchronizer Class Reference}
+\label{interface_a_t_synchronizer}\index{ATSynchronizer@{ATSynchronizer}}
+}
+Inheritance diagram for ATSynchronizer:\begin{figure}[h]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_a_t_synchronizer}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_a_t_synchronizer_a1a230c698ce38b033b22310db13120f5}{
+(id) -\/ {\bfseries initWithAppContext:}}
+\label{interface_a_t_synchronizer_a1a230c698ce38b033b22310db13120f5}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_aa091026c249106b0f059a86ae9c5afd8}{
+(void) -\/ {\bfseries close}}
+\label{interface_a_t_synchronizer_aa091026c249106b0f059a86ae9c5afd8}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_affb70ca203d9a187417db200776685c0}{
+(\hyperlink{class_n_s_string}{NSString} $\ast$) -\/ {\bfseries authKeyOrNull}}
+\label{interface_a_t_synchronizer_affb70ca203d9a187417db200776685c0}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_a6b5f15941c11220049e877543e7adb62}{
+(void) -\/ {\bfseries fetchEntity:}}
+\label{interface_a_t_synchronizer_a6b5f15941c11220049e877543e7adb62}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_ae7b25a346a2082dfbd5e54ac9ae6619f}{
+(void) -\/ {\bfseries syncObject:}}
+\label{interface_a_t_synchronizer_ae7b25a346a2082dfbd5e54ac9ae6619f}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_adf5b437093a61f09ee914cc61e30f62d}{
+(void) -\/ {\bfseries startSync}}
+\label{interface_a_t_synchronizer_adf5b437093a61f09ee914cc61e30f62d}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_add32dc8f725e3d33a8b49e9bea0460ba}{
+(void) -\/ {\bfseries sync}}
+\label{interface_a_t_synchronizer_add32dc8f725e3d33a8b49e9bea0460ba}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_a063d9fcbbadfd834fded74a9a90de04e}{
+(void) -\/ {\bfseries updateObjectAtURI:withDictionary:}}
+\label{interface_a_t_synchronizer_a063d9fcbbadfd834fded74a9a90de04e}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_a5975c374e80ef16d1131b8af6a3f1c17}{
+(void) -\/ {\bfseries changeURIFrom:to:}}
+\label{interface_a_t_synchronizer_a5975c374e80ef16d1131b8af6a3f1c17}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_a237c7017d5b328901ef056c4174b1284}{
+(void) -\/ {\bfseries startAutosync}}
+\label{interface_a_t_synchronizer_a237c7017d5b328901ef056c4174b1284}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_a50d1711cbe2f564ea1633e80fbc00dd7}{
+(void) -\/ {\bfseries stopAutosync}}
+\label{interface_a_t_synchronizer_a50d1711cbe2f564ea1633e80fbc00dd7}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_a311d78f60c5b19b749bcc47ec43aa81b}{
+(void) -\/ {\bfseries \_\-didChangeAppObject:}}
+\label{interface_a_t_synchronizer_a311d78f60c5b19b749bcc47ec43aa81b}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{interface_a_t_mapping_helper}{ATMappingHelper} $\ast$ \hyperlink{interface_a_t_synchronizer_a31d09b73a13ca9815cd0f62d60dbc373}{\_\-mappingHelper}
+\item 
+\hyperlink{interface_a_t_meta_context}{ATMetaContext} $\ast$ \hyperlink{interface_a_t_synchronizer_a14e16b95fa385616596db1b540fb8280}{\_\-metaContext}
+\item 
+\hypertarget{interface_a_t_synchronizer_a4d68957b743ed4634a79496c9ce4857e}{
+\hyperlink{interface_a_t_app_context}{ATAppContext} $\ast$ {\bfseries \_\-appContext}}
+\label{interface_a_t_synchronizer_a4d68957b743ed4634a79496c9ce4857e}
+
+\item 
+\hyperlink{interface_a_t_message_client}{ATMessageClient} $\ast$ \hyperlink{interface_a_t_synchronizer_a7540768d28730fa0da9a29c8bd3db701}{\_\-messageClient}
+\item 
+\hypertarget{interface_a_t_synchronizer_ac8d7d4aca2cae90b6b218443d9dbcb77}{
+\hyperlink{interface_a_t_resource_client}{ATResourceClient} $\ast$ {\bfseries \_\-resourceClient}}
+\label{interface_a_t_synchronizer_ac8d7d4aca2cae90b6b218443d9dbcb77}
+
+\item 
+\hyperlink{class_n_s_string}{NSString} $\ast$ \hyperlink{interface_a_t_synchronizer_aff441de7abd4bb9fb6fb62ebfb36c072}{\_\-authKey}
+\item 
+\hypertarget{interface_a_t_synchronizer_a2f1074693dc133a3a76305842905cbe7}{
+BOOL {\bfseries \_\-isSyncScheduled}}
+\label{interface_a_t_synchronizer_a2f1074693dc133a3a76305842905cbe7}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_a_t_synchronizer_aa4d38b9c8291f814c3e89a936e366748}{
+\hyperlink{interface_a_t_meta_context}{ATMetaContext} $\ast$ {\bfseries metaContext}}
+\label{interface_a_t_synchronizer_aa4d38b9c8291f814c3e89a936e366748}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_ae4a168720bbd872e1fb509a951edc6f0}{
+\hyperlink{interface_a_t_app_context}{ATAppContext} $\ast$ {\bfseries appContext}}
+\label{interface_a_t_synchronizer_ae4a168720bbd872e1fb509a951edc6f0}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_ad8ac915848318015ef77a42d367a4a64}{
+\hyperlink{interface_a_t_mapping_helper}{ATMappingHelper} $\ast$ {\bfseries mappingHelper}}
+\label{interface_a_t_synchronizer_ad8ac915848318015ef77a42d367a4a64}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_a5506f23cbd14b9a27c6749a7eaf95d20}{
+\hyperlink{interface_a_t_message_client}{ATMessageClient} $\ast$ {\bfseries messageClient}}
+\label{interface_a_t_synchronizer_a5506f23cbd14b9a27c6749a7eaf95d20}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_a11fbd96e8afa8f5a36c1be409d447053}{
+\hyperlink{interface_a_t_resource_client}{ATResourceClient} $\ast$ {\bfseries resourceClient}}
+\label{interface_a_t_synchronizer_a11fbd96e8afa8f5a36c1be409d447053}
+
+\item 
+\hypertarget{interface_a_t_synchronizer_aa10ad4a0dfe439088079385499f8e0ec}{
+\hyperlink{class_n_s_string}{NSString} $\ast$ {\bfseries authKey}}
+\label{interface_a_t_synchronizer_aa10ad4a0dfe439088079385499f8e0ec}
+
+\item 
+id$<$ \hyperlink{protocol_a_t_synchronizer_delegate-p}{ATSynchronizerDelegate} $>$ \hyperlink{interface_a_t_synchronizer_abef36e70ffe47396911ae10ed7c565a7}{delegate}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Data Documentation}
+\hypertarget{interface_a_t_synchronizer_aff441de7abd4bb9fb6fb62ebfb36c072}{
+\index{ATSynchronizer@{ATSynchronizer}!\_\-authKey@{\_\-authKey}}
+\index{\_\-authKey@{\_\-authKey}!ATSynchronizer@{ATSynchronizer}}
+\subsubsection[{\_\-authKey}]{\setlength{\rightskip}{0pt plus 5cm}-\/ ({\bf NSString}$\ast$) {\bf \_\-authKey}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{interface_a_t_synchronizer_aff441de7abd4bb9fb6fb62ebfb36c072}
+State \hypertarget{interface_a_t_synchronizer_a31d09b73a13ca9815cd0f62d60dbc373}{
+\index{ATSynchronizer@{ATSynchronizer}!\_\-mappingHelper@{\_\-mappingHelper}}
+\index{\_\-mappingHelper@{\_\-mappingHelper}!ATSynchronizer@{ATSynchronizer}}
+\subsubsection[{\_\-mappingHelper}]{\setlength{\rightskip}{0pt plus 5cm}-\/ ({\bf ATMappingHelper}$\ast$) {\bf \_\-mappingHelper}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{interface_a_t_synchronizer_a31d09b73a13ca9815cd0f62d60dbc373}
+Helper \hypertarget{interface_a_t_synchronizer_a7540768d28730fa0da9a29c8bd3db701}{
+\index{ATSynchronizer@{ATSynchronizer}!\_\-messageClient@{\_\-messageClient}}
+\index{\_\-messageClient@{\_\-messageClient}!ATSynchronizer@{ATSynchronizer}}
+\subsubsection[{\_\-messageClient}]{\setlength{\rightskip}{0pt plus 5cm}-\/ ({\bf ATMessageClient}$\ast$) {\bf \_\-messageClient}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{interface_a_t_synchronizer_a7540768d28730fa0da9a29c8bd3db701}
+Networking clients \hypertarget{interface_a_t_synchronizer_a14e16b95fa385616596db1b540fb8280}{
+\index{ATSynchronizer@{ATSynchronizer}!\_\-metaContext@{\_\-metaContext}}
+\index{\_\-metaContext@{\_\-metaContext}!ATSynchronizer@{ATSynchronizer}}
+\subsubsection[{\_\-metaContext}]{\setlength{\rightskip}{0pt plus 5cm}-\/ ({\bf ATMetaContext}$\ast$) {\bf \_\-metaContext}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{interface_a_t_synchronizer_a14e16b95fa385616596db1b540fb8280}
+Context 
+
+\subsubsection{Property Documentation}
+\hypertarget{interface_a_t_synchronizer_abef36e70ffe47396911ae10ed7c565a7}{
+\index{ATSynchronizer@{ATSynchronizer}!delegate@{delegate}}
+\index{delegate@{delegate}!ATSynchronizer@{ATSynchronizer}}
+\subsubsection[{delegate}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (id$<$ {\bf ATSynchronizerDelegate} $>$) delegate\hspace{0.3cm}{\ttfamily  \mbox{[}read, write, assign\mbox{]}}}}
+\label{interface_a_t_synchronizer_abef36e70ffe47396911ae10ed7c565a7}
+Delegate 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+ATSynchronizer.h\item 
+ATSynchronizer.m\end{DoxyCompactItemize}

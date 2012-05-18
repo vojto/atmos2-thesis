@@ -1,0 +1,132 @@
+\hypertarget{interface_a_t_message_client}{
+\subsubsection{ATMessageClient Class Reference}
+\label{interface_a_t_message_client}\index{ATMessageClient@{ATMessageClient}}
+}
+
+
+{\ttfamily \#import $<$ATMessageClient.h$>$}
+
+Inheritance diagram for ATMessageClient:\begin{figure}[h]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_a_t_message_client}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_a_t_message_client_ac3819bad54449ea9f46b3d9929bbf435}{
+(id) -\/ {\bfseries initWithSynchronizer:}}
+\label{interface_a_t_message_client_ac3819bad54449ea9f46b3d9929bbf435}
+
+\item 
+\hypertarget{interface_a_t_message_client_a5dc5708c4e13d7a75f78050b5f15249c}{
+(void) -\/ {\bfseries connect}}
+\label{interface_a_t_message_client_a5dc5708c4e13d7a75f78050b5f15249c}
+
+\item 
+\hypertarget{interface_a_t_message_client_ade89bb992bb85887edb8c22f877315e3}{
+(BOOL) -\/ {\bfseries isConnected}}
+\label{interface_a_t_message_client_ade89bb992bb85887edb8c22f877315e3}
+
+\item 
+\hypertarget{interface_a_t_message_client_aaf252625e14f5b125bc246eaa85a0c15}{
+(void) -\/ {\bfseries \_\-initializeSocketConnection}}
+\label{interface_a_t_message_client_aaf252625e14f5b125bc246eaa85a0c15}
+
+\item 
+\hypertarget{interface_a_t_message_client_ac73d19a7651d8e492c9ac97325640e0a}{
+(void) -\/ {\bfseries \_\-sendConnectMessage}}
+\label{interface_a_t_message_client_ac73d19a7651d8e492c9ac97325640e0a}
+
+\item 
+\hypertarget{interface_a_t_message_client_a79c2b59c186f18881680ab4fc1f277d1}{
+(void) -\/ {\bfseries disconnect}}
+\label{interface_a_t_message_client_a79c2b59c186f18881680ab4fc1f277d1}
+
+\item 
+\hypertarget{interface_a_t_message_client_a23c6f5dbb5a6358341d1707b91b86911}{
+(void) -\/ {\bfseries \_\-didReceiveServerAuthFailure:}}
+\label{interface_a_t_message_client_a23c6f5dbb5a6358341d1707b91b86911}
+
+\item 
+\hypertarget{interface_a_t_message_client_a2b1b29a59e25f19e2395b8cd51cf4c26}{
+(void) -\/ {\bfseries \_\-didReceiveServerAuthSuccess:}}
+\label{interface_a_t_message_client_a2b1b29a59e25f19e2395b8cd51cf4c26}
+
+\item 
+\hypertarget{interface_a_t_message_client_a03ec182577d528bc36c8999ea7e5b074}{
+(void) -\/ {\bfseries sendMessage:}}
+\label{interface_a_t_message_client_a03ec182577d528bc36c8999ea7e5b074}
+
+\item 
+\hypertarget{interface_a_t_message_client_a8e98344567ab31d6976978d5ccc172bd}{
+(void) -\/ {\bfseries \_\-didReceiveServerPush:}}
+\label{interface_a_t_message_client_a8e98344567ab31d6976978d5ccc172bd}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_a_t_message_client_a59f618866758b87a03b2814d597ea143}{
+BOOL {\bfseries \_\-isRunning}}
+\label{interface_a_t_message_client_a59f618866758b87a03b2814d597ea143}
+
+\item 
+\hypertarget{interface_a_t_message_client_acd349f1b49d1ce1f335c58816bb8219a}{
+\hyperlink{interface_a_t_synchronizer}{ATSynchronizer} $\ast$ {\bfseries \_\-sync}}
+\label{interface_a_t_message_client_acd349f1b49d1ce1f335c58816bb8219a}
+
+\item 
+\hyperlink{class_n_s_string}{NSString} $\ast$ \hyperlink{interface_a_t_message_client_a10e7fe2e07ea9c28ca3cc987f85bff10}{\_\-host}
+\item 
+\hypertarget{interface_a_t_message_client_a13e73da308c7e71f864516a7b818d06c}{
+NSInteger {\bfseries \_\-port}}
+\label{interface_a_t_message_client_a13e73da308c7e71f864516a7b818d06c}
+
+\item 
+\hypertarget{interface_a_t_message_client_ad7ddc109d962798a2e64d7ba292e19e4}{
+SocketIO $\ast$ {\bfseries \_\-connection}}
+\label{interface_a_t_message_client_ad7ddc109d962798a2e64d7ba292e19e4}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_a_t_message_client_a32d4d7b9e4f15f1595efca5ab85b1381}{
+\hyperlink{interface_a_t_synchronizer}{ATSynchronizer} $\ast$ {\bfseries sync}}
+\label{interface_a_t_message_client_a32d4d7b9e4f15f1595efca5ab85b1381}
+
+\item 
+\hypertarget{interface_a_t_message_client_a330b8c86d98c6ef9cbd8a8f3e2cae457}{
+\hyperlink{class_n_s_string}{NSString} $\ast$ {\bfseries host}}
+\label{interface_a_t_message_client_a330b8c86d98c6ef9cbd8a8f3e2cae457}
+
+\item 
+\hypertarget{interface_a_t_message_client_a8b889518a76ec8f627e401188761ebf1}{
+NSInteger {\bfseries port}}
+\label{interface_a_t_message_client_a8b889518a76ec8f627e401188761ebf1}
+
+\item 
+\hypertarget{interface_a_t_message_client_a301eb41f17a8ab3300e3d84b06ee8ceb}{
+SocketIO $\ast$ {\bfseries connection}}
+\label{interface_a_t_message_client_a301eb41f17a8ab3300e3d84b06ee8ceb}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\hyperlink{interface_a_t_message_client}{ATMessageClient} is responsible for dealing with live connection for push updates and notifications. 
+
+\subsubsection{Member Data Documentation}
+\hypertarget{interface_a_t_message_client_a10e7fe2e07ea9c28ca3cc987f85bff10}{
+\index{ATMessageClient@{ATMessageClient}!\_\-host@{\_\-host}}
+\index{\_\-host@{\_\-host}!ATMessageClient@{ATMessageClient}}
+\subsubsection[{\_\-host}]{\setlength{\rightskip}{0pt plus 5cm}-\/ ({\bf NSString}$\ast$) {\bf \_\-host}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{interface_a_t_message_client_a10e7fe2e07ea9c28ca3cc987f85bff10}
+Connection 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+ATMessageClient.h\item 
+ATMessageClient.m\end{DoxyCompactItemize}

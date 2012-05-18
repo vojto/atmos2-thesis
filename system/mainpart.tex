@@ -1,0 +1,582 @@
+\renewcommand{\thesection} {\Alph{section}}
+\section{System guide}
+
+\subsection{JavaScript library}
+
+All of the following sources are available in the \href{https://github.com/vojto/atmos2}{GitHub repository of Atmosphere}.
+
+\begin{lstlisting}[caption=synchronizer.coffee]
+Spine     = require('spine')
+SocketIO  = require('./vendor/socket.io')
+window.SocketIO = SocketIO
+
+MessageClient   = require('./message_client')
+AppContext      = require('./app_context')
+MetaContext     = require('./meta_context')
+ResourceClient  = require('./resource_client')
+
+# Atmosphere.Synchronizer
+#
+# The main interface used mostly for configuration and management of the
+# synchronization.
+# -----------------------------------------------------------------------------
+
+class Synchronizer extends Spine.Module
+  @include Spine.Events
+
+  # Object lifecycle
+  # ---------------------------------------------------------------------------
+  
+  constructor: (options) ->
+    @messageClient = new MessageClient(this)
+    @metaContext = new MetaContext()
+    @appContext = new AppContext()
+    @resourceClient = new ResourceClient(sync: this, appContext: @appContext)
+    @_needsSync = false
+    @_isSyncInProgress = false
+    Synchronizer.instance = this
+    Synchronizer.res = @resourceClient
+
+  # Resource interface
+  # ---------------------------------------------------------------------------
+
+  updateOrCreate: (uri, item) ->
+    # Check for ID change
+    if item.id && item.id != uri.id
+      console.log "changing id #{uri.id} -> #{item.id}"
+      @appContext.changeID(uri, item.id)
+      @metaContext.changeIDAtURI(uri, item.id)
+      uri.id = item.id
+    @appContext.updateOrCreate(uri, item)
+
+  # Resource interface
+  # ---------------------------------------------------------------------------
+
+  fetch: (params...) ->
+    @resourceClient.fetch(params...)
+  
+  save: (object, options) ->
+    if options.sync
+      object.save()
+      uri = @appContext.objectURI(object)
+      options = object.remoteSaveOptions(options) if object.remoteSaveOptions?
+      @resourceClient.save(object, options)
+    else
+      object.save()
+      @markObjectChanged(object)
+      @setNeedsSync()
+  
+  execute: (params...) -> @resourceClient.execute(params...)
+  request: (params...) -> @resourceClient.request(params...)
+    
+
+  # Meta objects
+  # ---------------------------------------------------------------------------
+  
+  markObjectChanged: (object) ->
+    uri = @appContext.objectURI(object)
+    @metaContext.markURIChanged(uri)
+  
+  markURISynced: (uri) ->
+    @metaContext.markURISynced(uri)
+  
+  # Synchronization
+  # ---------------------------------------------------------------------------
+
+  setNeedsSync: ->
+    @_needsSync = true
+    @startSync()
+  
+  startSync: ->
+    return unless @_needsSync == true
+    # return if @_isSyncInProgress == true
+    @_isSyncInProgress = true
+    resourceClient = @resourceClient
+    @metaContext.changedObjects (metaObjects) =>
+      for metaObject in metaObjects
+        action = if metaObject.isLocalOnly then "create" else "update"
+        console.log "syncing meta object #{action}", metaObject
+        object = @appContext.objectAtURI(metaObject.uri)
+        options = {action: action}
+        options = object.remoteSaveOptions(options) if object.remoteSaveOptions?
+        resourceClient.save(object, options)
+        # TODO: Finish sync
+  
+  removeObjectsNotInList: (collection, ids, scope) ->
+    uris = @appContext.allURIs(collection, scope)
+    for uri in uris
+      isInList = ids.indexOf(uri.id) != -1
+      if !isInList
+        @metaContext.isURILocalOnly uri, (res) =>
+          return if res == true # Don't destroy if object is local only
+          console.log "[ResourceClient] Local id #{uri.id} wasn't retrieved, destroying."
+          @appContext.destroy(uri)
+    
+  # Auth
+  # ---------------------------------------------------------------------------  
+  
+  setAuthKey: (key) ->
+    @authKey = key
+
+  hasAuthKey: ->
+    @authKey? && @authKey != ""
+
+  didAuth: (content) ->
+    @trigger("auth_success")
+    @getChanges()
+
+  didFailAuth: (content) ->
+    @trigger("auth_fail")
+
+
+module.exports = Synchronizer
+\end{lstlisting}
+
+\begin{lstlisting}[caption=app_context.coffee]
+String.prototype.underscorize = ->
+	@replace /([A-Z])/g, (letter) -> "_#{letter.toLowerCase()}".substr(1)
+
+class AppContext
+  constructor: ->
+    @_models = {}
+  
+  exists: (uri) ->
+    model = @_modelForURI(uri)
+    !!model.exists(uri.id)
+  
+  updateOrCreate: (uri, data) ->
+    if @exists(uri)
+      @update uri, data
+    else
+      @create uri, data
+  
+  create: (uri, data) ->
+    model = @_modelForURI(uri)
+    record = new model(data)
+    record.id = uri.id if uri.id?
+    record.save()
+    uri.id = record.id
+    model.fetch()
+    record
+  
+  update: (uri, data) ->
+    record = @objectAtURI(uri)
+    record.updateAttributes(data)
+    record
+  
+  changeID: (uri, id) ->
+    record = @objectAtURI(uri)
+    console.log "changing id from #{record.id} to #{id}"
+    record.changeID(id)
+  
+  relation: (name, sourceURI, targetURI) ->
+    source = @objectAtURI(sourceURI)
+    target = @objectAtURI(targetURI)
+    hash = {}
+    hash[name] = target
+    source.updateAttributes(hash)
+    source.save()
+  
+  objectAtURI: (uri) ->
+    model = @_modelForURI(uri)
+    model.find(uri.id)
+  
+  dataForURI: (uri) ->
+    @dataForObject(@objectAtURI(uri))
+  
+  dataForObject: (object) ->
+    object.attributes()
+  
+  _modelForURI: (uri) ->
+    model = @_models[uri.collection]
+    unless model
+      console.log "Initializing model", uri.collection
+      model = require("models/#{uri.collection.underscorize()}")
+      model.fetch()
+      @_models[uri.collection] = model
+    model
+  
+  objectURI: (object) ->
+    {collection: object.constructor.className, id: object.id}
+  
+  allURIs: (collection, predicate) ->
+    uri = {collection:collection}
+    model = @_modelForURI(uri)
+    # model.fetch() # TODO: Fetch maybe?
+    objects = if predicate?
+      model.select(predicate)
+    else
+      model.all()
+    @objectURI(object) for object in objects
+  
+  destroy: (uri) ->
+    @objectAtURI(uri).destroy()
+  
+module.exports = AppContext
+\end{lstlisting}
+
+\begin{lstlisting}[caption=meta_context.coffee]
+Lawnchair = require('./vendor/lawnchair')
+
+KeyFromURI = (uri) ->
+  "#{uri.collection}.#{uri.id}"
+
+URIFromKey = (key) ->
+  [collection, id] = key.split(".")
+  {collection: collection, id: id}
+  
+
+# Atmosphere.MetaContext
+#
+# This class manages "meta" objects. Every application object has a meta object
+# where all synchronization-related information is stored.
+# =============================================================================
+
+class MetaContext
+  constructor: ->
+    @configure()
+    
+  configure: ->
+    # console.log "configuring"
+    new Lawnchair {db: "atmosphere", name: "Meta", adapter: window.LawnchairAdapter}, (store) =>
+      @store = store
+  
+  # Marking changes
+  # ---------------------------------------------------------------------------
+  
+  # Marks object at URI as changed.
+  markURIChanged: (uri) ->
+    @findOrCreateObjectAtURI uri, (object) =>
+      object.isChanged = true
+      @saveObject(object)
+
+  findOrCreateObjectAtURI: (uri, callback) ->
+    @objectAtURI uri, (object) =>
+      if object then callback(object) else @createObjectAtURI(uri, callback)
+        
+  objectAtURI: (uri, callback) ->
+    @store.get KeyFromURI(uri), (dict) ->
+      if dict? then callback(new MetaObject(dict)) else callback(null)
+  
+  createObjectAtURI: (uri, callback) ->
+    object = {key: KeyFromURI(uri), isChanged: false, isLocalOnly: true}
+    @store.save object, ->
+      # console.log "creating meta object for", object
+      callback(new MetaObject(object))
+  
+  saveObject: (object) ->
+    # console.log "saving", object, object.storeDict()
+    @store.save(object.storeDict())
+  
+  deleteObject: (object) ->
+    @store.remove object.storeKey(), ->
+  
+  changeIDAtURI: (uri, id) ->
+    @objectAtURI uri, (object) =>
+      return unless object
+      @deleteObject(object)
+      object.uri.id = id
+      @saveObject(object)
+  
+  # Getting changed objects
+  # ---------------------------------------------------------------------------
+  
+  isURILocalOnly: (uri, callback) ->
+    @objectAtURI uri, (object) ->
+      return callback(true) unless object
+      callback(object.isLocalOnly)
+  
+  isURIChanged: (uri, callback) ->
+    @objectAtURI uri, (object) ->
+      return callback(false) unless object
+      callback(object.isChanged)
+  
+  changedObjects: (callback) ->
+    changed = []
+    @store.all (dicts) ->
+      for dict in dicts
+        object = new MetaObject(dict)
+        changed.push(object) if object.isChanged == true
+      callback(changed)
+  
+  # Marking local/remote
+  # ---------------------------------------------------------------------------
+  
+  markURISynced: (uri) ->
+    @findOrCreateObjectAtURI uri, (object) =>
+      object.isLocalOnly  = false
+      object.isChanged    = false
+      @saveObject(object)
+
+# Atmosphere.MetaObject
+#
+# Represents a meta object.
+# =============================================================================  
+
+class MetaObject
+  constructor: (attrs) ->
+    return null unless attrs.key
+    @uri = URIFromKey(attrs.key)
+    @isChanged = attrs.isChanged
+    @isLocalOnly = attrs.isLocalOnly
+  
+  storeDict: ->
+    {key: @storeKey(), isChanged: @isChanged, isLocalOnly: @isLocalOnly}
+  
+  storeKey: ->
+    KeyFromURI(@uri)
+    
+
+module.exports = MetaContext
+\end{lstlisting}
+
+\begin{lstlisting}[caption=resource\_client.coffee]
+Spine = require('spine')
+{assert} = require('./util')
+
+class ResourceClient
+  constructor: (options) ->
+    @sync = options.sync
+    @appContext = options.appContext
+    
+    @base = null
+    @headers = {}
+    @routes = null
+    @IDField = "id"
+    @dataCoding = "form" # "json"
+    @subitems = {}
+
+  fetch: (model, options = {}) ->
+    collection = model.className
+    path = @_findPath(collection, "index", options)
+    ids = []
+    @request path, {}, (result) =>
+      items = @itemsFromResult(result)
+      unless items?
+        console.log "[ResourceClient] Items not found in response", result
+        return
+      ids = @updateFromItems(collection, items, options)
+      @_removeObjectsNotInList(collection, ids, options.removeScope) if options.remove == true
+      options.success() if options.success
+  
+  updateFromItems: (collection, items, options) ->
+    ids = []
+    for item in items
+      uri = {collection: collection}
+      object = @updateFromItem(uri, item, options)
+      ids.push(object.id)
+    ids
+  
+  updateFromItem: (uri, item, options = {}) ->
+    item.id = item[@IDField]
+    assert item.id, "[ResourceClient] There's no field '#{@IDField}' that is configured as IDField in incoming object"
+    uri.id or= item.id
+    options.updateData(item) if options.updateData?
+    if options.updateFromData?
+      options.updateFromData(uri, item, @_updateFromData)
+    else
+      @_updateFromData(uri, item)
+  
+  _updateFromData: (uri, data) =>
+    object = @sync.updateOrCreate(uri, data)
+    @sync.markURISynced(uri)
+    object
+  
+  _removeObjectsNotInList: (collection, ids, scope) ->
+    @sync.removeObjectsNotInList(collection, ids, scope)
+  
+  itemsFromResult: (result) ->
+    result
+
+  save: (object, options = {}) ->
+    uri = @appContext.objectURI(object)
+    path = @_findPathForURI(uri, options.action, options)
+    data = options.data || @appContext.dataForObject(object)
+    data[@IDField] = object.id unless data[@IDField]?
+    data = options.prepareData(data, options) if options.prepareData?
+    @request path, data, (result) =>
+      if options.sync
+        object.save()
+        uri = @appContext.objectURI(object)
+      @updateFromItem(uri, result, options)
+
+  execute: (options, callback) ->
+    if typeof options == 'string'
+      path = {method: 'get', path: options}
+    else if options.collection
+      path = @_findPath(options.collection, options.action, options)
+    else if options.object
+      path = @_findPathForObject(options.object, options.action, options)
+    else
+      path = options
+    @request path, options.data, callback
+
+  _findPathForObject: (object, action, options) ->
+    uri = @appContext.objectURI(object)
+    @_findPathForURI(uri)
+  
+  _findPathForURI: (uri, action, options) ->
+    options.pathParams    or= {}
+    options.pathParams.id or= uri.id
+    @_findPath(uri.collection, options.action, options)
+
+  _findPath: (collection, action, options = {}) ->
+    assert @routes[collection], "No route found for #{collection}"
+    path = @routes[collection][action]
+    assert path, "No route found for #{collection}/#{action}"
+    [method, path] = path.split(" ")
+    if options.pathParams?
+      path = path.replace(":#{param}", value) for param, value of options.pathParams
+    route = {method: method, path: path}
+    route.query = $.param(options.params) if options.params?
+    route
+
+  request: (path, data, callback) ->
+    proceed = =>
+      contentType = "application/x-www-form-urlencoded"
+      if @dataCoding == "json"
+        data = JSON.stringify(data)
+        contentType = "application/json" 
+      success = (result) ->
+        callback(result) if callback
+      error = (res, err) =>
+        if res.status == 401
+          console.log "failed with error 401 #{err}"
+          return @sync.didFailAuth()
+        console.log "Request failed #{res} #{err}", res, err
+      options = 
+        dataType: "json"
+        success: success
+        error: error
+        headers: @headers
+        contentType: contentType
+      options.data = data if data?
+      @ajax path, options
+    if @beforeRequest?
+      @beforeRequest(proceed)
+    else
+      proceed()
+  
+  ajax: (path, options = {}) ->
+    path = {path: path} if typeof path == 'string'
+    url = @base + path.path
+    url += "?#{path.query}" if path.query
+    options.type or= path.method
+    $.ajax url, options
+    
+
+  addHeader: (header, value) ->
+    @headers[header] = value
+
+module.exports = ResourceClient
+\end{lstlisting}
+
+\begin{lstlisting}[caption=message\_client.coffee]
+# Atmosphere.Client
+#
+# This class is responsible for socket communication through messages, thus
+# the name, "Message" client.
+# -----------------------------------------------------------------------------
+
+class MessageClient
+  constructor: (sync) ->
+    @sync = sync
+
+  connect: (callback) ->
+    @close()
+    console.log "[Atmosphere.Client] Connecting to #{@url}"
+    @socket = SocketIO.connect(@url, 'force new connection': true)
+    @socket.on 'connect', =>
+      console.log 'socket connected'
+      @send 'auth', @authKey
+    @socket.on 'notification', this.parseNotification
+    @socket.on 'update', this.parseUpdate
+    @socket.on 'disconnect', this.socketDidClose
+
+  close: ->
+    @socket.disconnect() if @socket
+
+  socketDidClose: =>
+    console.log "[Atmosphere.Client] Connection closed"
+    @socket = null
+
+  send: (type, content) ->
+    @socket.emit(type, content)
+  
+  # Messaging interface
+  # ---------------------------------------------------------------------------
+
+  parseNotification: (data) =>
+    console.log 'notification: ', data
+  
+  parseUpdate: (data) =>
+    @sync.updateOrCreate(data.uri, data.attrs)
+
+module.exports = MessageClient
+\end{lstlisting}
+
+\begin{lstlisting}[caption=spine.coffee]
+# Atmosphere Spine Model Adapter
+# -----------------------------------------------------------------------------
+
+Spine       = require('spine')
+Atmosphere  = require('./synchronizer')
+require('./lawnchair_spine')
+
+Spine.Model.Atmosphere =
+  extended: ->
+    @extend Spine.Model.Lawnchair
+    spineSave = @::["save"]
+    @::["save"] = (args...) ->
+      atmos = Atmosphere.instance
+      options = args[0]
+      if atmos? && options? && options.remote == true
+        atmos.save(this, options)
+      else
+        spineSave.call(this, args...)
+    @::["changeID"] = (id) -> # TODO: Fix this mess
+      @destroy()
+      @id = id
+      @newRecord = true
+      @save()
+    @bind 'beforeCreate', (record) ->
+      record.id or= @_uuid()
+
+  _uuid: ->
+    'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace /[xy]/g, (c) ->
+      r = Math.random() * 16 | 0
+      v = if c is 'x' then r else r & 3 | 8
+      v.toString 16
+  
+  # uid: -> @_uuid()
+
+  sync: (params = {}) ->
+    @fetch()
+    atmos = Atmosphere.instance
+    if atmos? && params.remote == true
+      atmos.fetch(@, params)
+
+
+\end{lstlisting}
+
+\subsection{Cocoa library}
+
+The source code for Cocoa library is not included here due to its size. It can be found in \href{https://github.com/vojto/atmos2-cocoa}{GitHub repository of Atmosphere}.
+
+Here follows the documentation for main classes and data structures of Cocoa implementation.
+
+\input{struct___a_t_object_u_r_i}
+\input{struct___a_t_route}
+\input{interface_a_t_app_context}
+\input{interface_a_t_attribute_mapper}
+\input{interface_a_t_connection_guard}
+\input{interface_a_t_entity_fetch_request}
+\input{interface_a_t_mapping_helper}
+\input{interface_a_t_message}
+\input{interface_a_t_message_client}
+\input{interface_a_t_meta_context}
+\input{interface_a_t_meta_object}
+\input{interface_a_t_object_save_request}
+\input{interface_a_t_resource_client}
+\input{interface_a_t_synchronizer}
+\input{protocol_a_t_synchronizer_delegate-p}
