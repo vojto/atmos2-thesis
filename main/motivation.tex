@@ -20,29 +20,25 @@ In the cloud architecture, client is the device that connects to cloud. Client a
 
 However, a web application isn't always sufficient. For example, on iPhone platform, web applications are limited, they can’t access some hardware features, such as camera. Native applications support these features, and those can be installed via App Store. So a client application can either be a website, or it can be a native application that requires installation.
 
-If there's a native application, in the SaaS business model is usually free: It charges for using the service, not for installing software. If user downloads the free application, but are not subscribed to the service, they won't be able to get past the login screen. 
+If there's a native application, in the SaaS business model is usually free: It charges for using the service, not for installing software. If user downloads the free application, but are not subscribed to the service, they will not be able to get past the login screen. 
 
 Atmosphere tries to improve these client applications and make their development faster. The next sections will discuss the current state of client applications.
 
 \subsubsection{Desktop applications}
 
-With SaaS becoming a popular model for software business, companies started focusing less on desktop applications and more on web applications.
+With SaaS becoming a popular model for software business, companies focus less on desktop applications. Instead, they build services that work online and the clients use web interface to access these services.
 
-Developing for desktop takes more effort than developing for web, mainly because it's easier to support all platforms when building a web app. For companies it might not be worth building individual application for every platform.
+It is possible to build desktop applications for SaaS products. But developing for desktop (for all platforms) takes more time and effort than developing for web. (Which supports all platforms right away.) Building a desktop application for every platform is not a viable option in many cases.
 
-Still there are some well-known SaaS products that provide a decent desktop application. A good example are the social networks. They have millions of users and they provide an API.
-
-WIP
-
-With millions of users and open API it is only logical that developers try to improve the experience by building a desktop applications. As for a particular example, Twitter has tens of desktop clients for all Windows, Mac and Linux platforms.
+This is not a case for social networks, for example. Social networks have millions of users and provide an API. Therefore many developers try to improve the user experience by building desktop applications for these services.
 
 It seems that user experience is generally better with desktop application rather than web applications. The first reason is that the user interface is on the client side: That means there are no requests, there is no need for AJAX, only the data is transferred through the network. Some desktop applications even use local storage to cache the local data.
 
-So the only problem left to solve is the very case when application doesn’t work with local data, but always makes networks requests, blocking the interface, needlesly making user wait. 
+So the only problem left to solve is the very case when application doesn’t work with local data, but always makes networks requests, blocking the interface, needlessly making user wait. 
 
 The desktop library of Atmosphere solves this problem by providing a library that extends local storage framework and adds transparent networking without interface blocking. 
 
-One last type of desktop applications are those with purpose of notifying users of events. Should an event occur in a web application, the only way of immediately notifying user is via email. These emails tend to get very annoyoing after time, so user start creating filters that hide them from the inbox, which partly defies the purpose.
+One last type of desktop applications are those with purpose of notifying users of events. Should an event occur in a web application, the only way of immediately notifying user is via email. These emails tend to get very annoying after time, so user start creating filters that hide them from the inbox, which partly defies the purpose.
 
 A better way of notifying users is to provide a desktop application they can launch and quit. Part of Atmosphere is the notification server which together with client libraries allow instant notifications for events that occured in the application. 
 
@@ -79,7 +75,3 @@ Moving logic to the client side is a great improvement itself. Still there are t
 Without Atmosphere, clicking on a task list would result in a few seconds wait for the tasks inside to load. With Atmosphere, the data is already cached locally, so opening a task list is instant. TaskDo and other applications are described in section Case Study.
 
 The next problem with web applications is that there are no push notifications, unless the business domain explicitly requires them. (Such as a chat application, or a game.) For most applications, it’s not exactly necessary to update objects  in real time between users, but it would make the application better.
-
-\subsection{Conclusion}
-
-It’s the current problems with client applications what Atmosphere is trying to remove. This section discussed what are the problems that make current client applications inconvenient to use and slightly outlined the proposed solutions. In further sections we’ll discuss the technologies that will be used and the solutions themselves.

@@ -39,8 +39,22 @@ Simperium also comes with a Cocoa framework for building iOS application. This f
 
 \subsection{Comparison with Atmosphere}
 
+
+\tabcolsep=10pt
+\begin{table}[!hb]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}\hline
+            & Platforms             & Requirements            & Real-time                       & Offline use       & Open-source \\\hline\hline
+Meteor      & JavaScript            & Meteor UI framework     & ✓                               &                   & ✓           \\\hline
+Firebase    & JavaScript            &                         & ✓                               &                   &             \\\hline
+Simperium   & JavaScript, Mac, iOS  &                         & With operational transformation & Mac & iOS only    &             \\\hline
+Atmosphere  & JavaScript, Mac, iOS  &                         & ✓                               & ✓                 & ✓           \\\hline
+  \end{tabular}
+\end{table}
+
+
 Atmosphere is very similar to Simperium by a few key points: It provides custom server logic, real-time synchronization, Cocoa library and an option for offline usage.
 
-It is still very different from these frameworks in one aspect: It allows building applications that utilize and existing application with it's REST API. All of the frameworks mentioned here require a whole new server-side application practically making developers rewrite their server code from scratch. (Or in worse case skip writing the server code.) Atmosphere is also open-source.
+It is still very different from these frameworks in one aspect: It allows building applications that utilize and existing application with its REST API. All of the frameworks mentioned here require a whole new server-side application practically making developers rewrite their server code from scratch. (Or in worse case skip writing the server code.) Atmosphere is also open-source.
 
 Because of this design decision Atmosphere cannot bring some features such as operational transformation for live editing. It would be impossible to implement it without drastically changing server code, which is one of the strong points of Atmosphere: It allows building real-time application with minimal change at the server side.

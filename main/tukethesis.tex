@@ -33,6 +33,7 @@
 \usepackage[final]{showkeys}%color%notref%notcite%final
 \usepackage[noprefix]{nomencl}
 \usepackage{verbatim}
+\usepackage{tabularx}
 \makeglossary % command to make *.glo file
 % \usepackage{parskip}
 \usepackage{indentfirst}
@@ -92,7 +93,7 @@ pdfsubject={Bachelor's Thesis}
 \faculty{Faculty of Electrical Engineering and Informatics}
 \facultyabbr{FEI}
 \department{Department of Computers and Informatics}
-\departmentabbr{KPI}
+\departmentabbr{DCI}
 \fieldofstudy{9.2.1 Informatics}
 \studyprogramme{Informatics}
 \supervisor{Assoc. Prof. Ing. František Jakab, PhD.}
@@ -159,17 +160,19 @@ TODO: Translate
 % a na  autora práce sa vzťahuje autorský zákon.
 
 \acknowledgement % begin the 'Acknowledgement'
-I would like to thank my supervisor Assoc. Prof. Ing. František Jakab, PhD. and my consultant Ing. Ivan Klimek. 
+I would like to thank my supervisor Assoc. Prof. Ing. František Jakab, PhD. and my consultant Ing. Ivan Klimek. I would also like to thank my family for supporting me in achieving my goals.
 \endacknowledgement
 
 \preface % begin the 'Preface'
 The world is online. There is hardly any computer program that doesn’t utilize the global network. 
 
-With most of the data being stored somewhere else we face a new problem: How to deliver this data from the network to user and back again in the most transparent way? The simplest solution is to not hide the networking, and we see that every day browsing the Internet. User navigates to a page, and they wait for it to load, then they interact with it.
+When the data is stored somewhere else, there is a new challenge: How to hide this fact from the user? In most cases it is not hidden at all, it is obvious that data is somewhere else. Users have to wait seconds for data to load before being able to interact with them.
 
-Still it seems this problem can be solved, and when it is, it improves the user experience greatly. One example is Google Mail. When user opens Google Mail, the unread messages are downloaded from the server, so when user decides to read them, they can see the contents instantly, with no waiting. 
+There are better solutions though. One example is Google Mail. When user opens Google Mail, the unread messages are downloaded from the server, so when user decides to read them, they can see the contents instantly, without having to wait. A little technical improvement causes a great effect on the user experience.
 
-This thesis describes Atmosphere, a set of software libraries that help to hide networking in a way that Google Mail does. The user perceives such applications as offline applications. In the end, the user experience and productivity is greatly improved. 
+Atmosphere is a platform that hides networking, like Google Mail does. When an Atmosphere-powered application is used, it seems like the data is on the same computer, which makes using the application much better an experience.
+
+Atmosphere was built along with this thesis, and this thesis describes many aspects of designing, implementing and using Atmosphere.
 \endpreface
 
 \thispagestyle{empty}
@@ -183,39 +186,21 @@ This thesis describes Atmosphere, a set of software libraries that help to hide 
 
 \thispagestyle{empty}
 %\addcontentsline{toc}{section}{\numberline{}List of Tables}
-\listoftables
-\newpage
+% \listoftables
+% \newpage
 
-\thispagestyle{empty}
-%\addcontentsline{toc}{section}{\numberline{}List of Symbols and
-%Abbreviations}
-\printglossary % input the 'List of Symbols and Abbreviations'
-\newpage
+% \thispagestyle{empty}
+% \addcontentsline{toc}{section}{\numberline{}List of Symbols and Abbreviations}
+% \printglossary % input the 'List of Symbols and Abbreviations'
+% \newpage
 
-%\addcontentsline{toc}{section}{\numberline{}List of Therms}
+% \addcontentsline{toc}{section}{\numberline{}List of Therms}
 \listofterms % begin the 'List of Therms'
 
 \begin{description}
-	\item[Dizertácia] je rozsiahla vedecká rozprava, v~ktorej sa na
-základe vedeckého výskumu a~s~použitím (využitím) bohatého dokladového
-materiálu  ako i~vedeckých metód rieši zložitý odborný problém.
-	\item[Font] je súbor, obsahujúci predpisy na zobrazenie textu
-v~danom písme, napr. na tlačiarni. To čo vidíme je písmo; font je súbor
-a~nevidíme ho.
-	\item[Kritika] je odborne vyhrotený, prísny pohľad na hodnotenú
-vec. Medzi recenziou a kritikou je taký pomer ako medzi diskusiou a
-polemikou. Pri kritike treba prísnosť\/ chápať\/ v~tom zmysle, že sa
-v~nej okrem iného navrhuje, ako hodnotené dielo skvalitniť\/.
-	\item[Meter (m)] je vzdialenosť\/, ktorú svetlo vo vákuu prejde
-za časový interval $\nicefrac{1}{299\,792\,458}$~sekundy.
-	\item[Písmom] rozumieme vlastný vzhľad znakov.
-	\item[Problém] termín používaný vo všeobecnom zmysle vo vzťahu
-k~akejkoľvek duševnej aktivite, ktorá má nejaký rozoznateľný cieľ.
-Samotný cieľ nemusí byť\/ v~dohľadne. Problémy možno charakterizovať\/
-tromi rozmermi -- oblasťou, obtiažnosťou a veľkosťou.
-	\item[Proces] je postupnonosť\/ či rad časovo usporiadaných
-udalostí tak, že každá predchádzajúca udalosť\/ sa zúčastňuje na
-determinácii nasledujúcej udalosti.
+\item[HTTP] Hypertext Transfer Protocol
+\item[SaaS] Software as a service, a type of cloud solution
+\item[PaaS] Platform as a service, a type of cloud solution
 \end{description}
 
 \setlength{\parindent}{1cm} 

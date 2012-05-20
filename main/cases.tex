@@ -4,7 +4,7 @@
 
 TaskDo \citep{taskdo} is a task manager application written using CoffeeScript \citep{coffeescript}, Spine \citep{spinejs} and Atmosphere. It features offline usage, synchronization with Google Tasks API \citep{google_tasks} and is bundled as application for Mac platform using MacGap. \citep{macgap}
 
-The strong point of TaskDo is its close resemblance to native application. It's bundled as one, it's very responsive, but the most imporant thing is that it uses local data, which are synced with Google Tasks API using Atmosphere.
+The strong point of TaskDo is its close resemblance to native application. It's bundled as one, it is very responsive, but the most imporant thing is that it uses local data, which are synced with Google Tasks API using Atmosphere.
 
 \begin{figure}[htbp]
   \centering
@@ -71,7 +71,7 @@ Since the Ruby application and the live notification server are running on the s
 
 Edukit implements failure recovery (see section \ref{sec:failure_recovery}) by using same object identifiers on both client and server side.
 
-When a local object is created, it's assigned a new UUID. When it's synchronized, the server creates it in the database, and sets it's identifier to the one created on the client side.
+When a local object is created, it is assigned a new UUID. When it is synchronized, the server creates it in the database, and sets it is identifier to the one created on the client side.
 
 This helps prevent the case of one local object being created two times on the server side in case of network failure. This situation can never happen, because server uses client identifier to create remote object, so if an object with same identifier already exists, it will simply return that object instead of creating a new one.
 

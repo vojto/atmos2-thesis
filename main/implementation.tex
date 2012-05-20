@@ -46,7 +46,7 @@ Synchronizer is the main class of Atmosphere. It lies on top of other classes, a
 
 \textbf{Saving objects} allows specifying option which would make the saving 'synchronous'. In such case Atmosphere will immediately produce a save network request. When this option is set to false, the object is only marked as changed, and is synchronized in the next synchronization loop.
 
-There are two purposes for this option: First, it disables offline usage. If the request fails, it won't be attempted again. Second, it is possible to pass options to such request. Note that asynchronous saving doesn't allow any options to be sent along with the save method. Making saving synchronous enables extra options, such as URL arguments or extra POST body.
+There are two purposes for this option: First, it disables offline usage. If the request fails, it will not be attempted again. Second, it is possible to pass options to such request. Note that asynchronous saving doesn't allow any options to be sent along with the save method. Making saving synchronous enables extra options, such as URL arguments or extra POST body.
 
 \textbf{Synchronization} contains logic for looking up changed objects in meta context, deciding whether to send a create or update request, and finally calling the save method of resource client.
 
@@ -86,7 +86,7 @@ It's job is to unify interfaces of different model layers where Atmosphere might
 
 \textbf{Meta context} manages meta information for each of application objects. It provides methods for finding meta objects for existing application objects, creating new ones, changing identifiers and updating meta attributes.
 
-The motivation for this class came from the original implementation of Atmosphere which was intended only for Cocoa applications. Cocoa uses SQLite to store application objects, so it's not possible to dynamically add attributes to the schema.
+The motivation for this class came from the original implementation of Atmosphere which was intended only for Cocoa applications. Cocoa uses SQLite to store application objects, so it is not possible to dynamically add attributes to the schema.
 
 Atmosphere needs some extra attributes, such as 'is changed' or 'is local only'. Therefore a new schema is used, where each item contains identifier of the application object and values for these meta attributes.
 

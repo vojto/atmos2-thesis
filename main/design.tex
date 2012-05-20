@@ -14,13 +14,13 @@ In computer science, an asynchronous operation is such one, that doesn’t block
 
 Asynchronous interface is the result of applying the same concept to users and interfaces. The idea is to minimize amount of interface blocking. (Displaying some graphic that informs user the program is doing some work.)
 
-An asynchronous interface gives immediate response, processing is done in the background and as soon as it's finished, the interface might present further results if needed.
+An asynchronous interface gives immediate response, processing is done in the background and as soon as it is finished, the interface might present further results if needed.
 
 \subsubsection{Local Storage}
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=350pt]{LocalStorage1.png}
+\includegraphics[width=430pt]{LocalStorage1.png}
 \caption{Fetching objects using Atmosphere \label{fig:1}}
 \end{figure}
 
@@ -30,11 +30,11 @@ Figure \ref{fig:1} presents a situation of fetching a set of objects. When user 
 
 And the same time the application makes a network request to retrieve the newest data. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item3.png}} When the data is retrieved from the server, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item4.png}} Atmosphere will look at their unique identifiers and try to find an existing copy in the local storage. If the object is found, its attributes are updated and it’s saved back to the local storage. If it’s not, a new object is created locally. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item5.png}}
 
-The user interface is bound to the local data. When new local data are saved, it's automatically updated to reflect current local data. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item6.png}}
+The user interface is bound to the local data. When new local data are saved, it is automatically updated to reflect current local data. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item6.png}}
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=350pt]{LocalStorage2.png}
+\includegraphics[width=430pt]{LocalStorage2.png}
 \caption{Creating objects using Atmosphere \label{fig:2}}
 \end{figure}
 
@@ -42,18 +42,18 @@ For making changes the objects, the workflow is similar, depicted in Figure \ref
 
 When user makes changes to an object, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item1.png}} the changes are immediately written to the local storage. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item2.png}} This operation is instant, so user sees response without any blocking. Now the object is marked as 'changed locally', which schedules it for synchronization. The synchronization module picks it up, and sends it to the server. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item3.png}} The rest of the process works in the same way as with fetching objects.
 
-Since the REST services have different actions for creating new objects and updating existing ones, it's important to decide whether to send a 'create' or an 'update' request. For this purpose Atmosphere keeps track of boolean information which indicates whether the object is 'local only'. This value is set true at the first time object is created, and is changed to false once confirmation about creation is received from the server.
+Since the REST services have different actions for creating new objects and updating existing ones, it is important to decide whether to send a 'create' or an 'update' request. For this purpose Atmosphere keeps track of boolean information which indicates whether the object is 'local only'. This value is set true at the first time object is created, and is changed to false once confirmation about creation is received from the server.
 
-Also, local objects need to be identified somehow. When an object is created locally, it's assigned a temporary identifier in form of UUID. Once it's succesfuly created remotely, the identifier is updated to permanent identifier assigned by the server.
+Also, local objects need to be identified somehow. When an object is created locally, it is assigned a temporary identifier in form of UUID. Once it is successfully created remotely, the identifier is updated to permanent identifier assigned by the server.
 
 \subsubsection{Recovering from failure}
 \label{sec:failure_recovery}
 
 Synchronization relies on network requests and network connection might be very unreliable at times. Also we have to consider that many of Atmosphere-based applications are developed especially for mobile devices and mobile connection is even less reliable.
 
-The case of fetching objects doesn't require much attention. If objects fail to load, user simply won't see them. A notification about network failure can be displayed, but this is responsibility of application logic.
+The case of fetching objects doesn't require much attention. If objects fail to load, user will not see them. A notification about network failure can be displayed, but this is responsibility of application logic.
 
-Let's consider a case of saving objects. Atmosphere is designed in a way that it will always create a local object first. If the remote request fails, the local object exists, but the remote doesn't.
+The case of saving object is more complicated. Atmosphere is designed in a way that it will always create a local object first. If the remote request fails, the local object exists, but the remote doesn't.
 
 This problem is partly solved by keeping track of which objects are 'local only'. (See Figure \ref{fig:recovery1}.) Every object is marked as 'local only' for as long as its existence wasn't confirmed by the server. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item1.png}} If one request fails, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item2.png}} the 'local only' mark remains on object, \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item3.png}} and the synchronization is attempted in the next cycle. \raisebox{-2.5mm}{\includegraphics[height=0.3in]{Item4.png}}
 
@@ -96,7 +96,7 @@ Another reason to use local storage and synchronization is that the application 
 
 \begin{figure}[htbp]
   \centering
-    \includegraphics[width=3in]{figures/Notifications.png}
+    \includegraphics[width=3.5in]{figures/Notifications.png}
   \caption{Types of Atmosphere notifications}
   \label{fig:figures_NotificationServer}
 \end{figure}
