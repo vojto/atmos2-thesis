@@ -43,13 +43,17 @@ Simperium also comes with a Cocoa framework for building iOS application. This f
 \tabcolsep=10pt
 \begin{table}[!hb]
   \centering
-  \begin{tabular}{|c|c|c|c|c|}\hline
-            & Platforms             & Requirements            & Real-time                       & Offline use       & Open-source \\\hline\hline
-Meteor      & JavaScript            & Meteor UI framework     & ✓                               &                   & ✓           \\\hline
-Firebase    & JavaScript            &                         & ✓                               &                   &             \\\hline
-Simperium   & JavaScript, Mac, iOS  &                         & With operational transformation & Mac & iOS only    &             \\\hline
-Atmosphere  & JavaScript, Mac, iOS  &                         & ✓                               & ✓                 & ✓           \\\hline
+  \rotatebox{90}{
+  \begin{tabular}{|p{2.5cm}|p{2cm}|p{3cm}|p{2cm}|p{3cm}|p{2cm}|p{1.5cm}|}\hline
+                & Platforms             & Requirements            & Server                  & Real-time                       & Offline use         & Open-source \\\hline\hline
+\textbf{Meteor}      & JavaScript                & Meteor UI framework     & Provided                & Yes                             &                     & Yes           \\\hline
+\textbf{Firebase}    & JavaScript                & None                    & Provided                & Yes                             &                     & No            \\\hline
+\textbf{Simperium}   & JavaScript, Mac, iOS      & None                    & Provided                & With operational transformation & Mac and iOS only    & No            \\\hline
+\textbf{Atmosphere}  & JavaScript, Mac, iOS      & None                    & Any REST API            & Yes                             & Yes                 & Yes           \\\hline
   \end{tabular}
+  }
+  \caption{Comparison of solutions similar to Atmosphere}
+  \label{table:comparison}
 \end{table}
 
 
@@ -58,3 +62,5 @@ Atmosphere is very similar to Simperium by a few key points: It provides custom 
 It is still very different from these frameworks in one aspect: It allows building applications that utilize and existing application with its REST API. All of the frameworks mentioned here require a whole new server-side application practically making developers rewrite their server code from scratch. (Or in worse case skip writing the server code.) Atmosphere is also open-source.
 
 Because of this design decision Atmosphere cannot bring some features such as operational transformation for live editing. It would be impossible to implement it without drastically changing server code, which is one of the strong points of Atmosphere: It allows building real-time application with minimal change at the server side.
+
+The overview of features provided by these projects is shown in Table \ref{table:comparison}.
