@@ -92,6 +92,14 @@ Atmosphere needs some extra attributes, such as 'is changed' or 'is local only'.
 
 \subsection{JavaScript details}
 
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=3.5in]{Atmos-Spine.png}
+  \caption{Usage of Spine by Atmosphere}
+  \label{fig:figures_Atmos-Spine}
+\end{figure}
+
+
 At the time of writing, JavaScript implementation of Atmosphere is built on top of the Spine \citep{spinejs} library which is a lightweight framework for building JavaScript web applications.
 
 The library doesn’t completely rely on Spine, instead it only utilizes its model layer. Furthermore, all the code that requires Spine is contained in one small file (application context), which can be easily rewritten for other client side frameworks and their own model layers.
@@ -108,4 +116,4 @@ JavaScript implementation uses Socket.IO \citep{socketio} client library for ope
 
 The Cocoa implementation is packaged as Xcode framework. It is written in Objective-C and can be compiled for both desktop (Mac) and mobile (iPhone and iPad) platforms.
 
-The Cocoa implementation relies on Core Data which is standard for storing objects in Cocoa applications. It binds onto Core Data workflow which allows automatically saving objects remotely as they are saved in the local store.
+The Cocoa implementation relies on Core Data which is standard for storing objects in Cocoa applications. It binds onto Core Data workflow that allows automatically saving objects remotely as they are saved in the local store.

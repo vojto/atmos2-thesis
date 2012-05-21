@@ -6,13 +6,17 @@
 \section*{Introduction}
 \addcontentsline{toc}{section}{\numberline{}Introduction}
 
-The basic idea behind Atmosphere is to make client applications of SaaS (Software as a service) products more user friendly.
+The basic idea behind Atmosphere is to make SaaS (Software as a service) client applications more user friendly by caching objects locally.
 
-The first chapter defines cloud computing and individual types of cloud solutions.
+The are already products that help with this task: For example RestKit \citep{restkit} is a framework that allows using remote objects offline in iPhone applications. For the web there are Spine or Backbone \citep{maccaw_js} that simplify accessing REST (Representational state transfer) interface via model layer.
 
-The next chapter describes the motivation behind Atmosphere. It talks about the current state of client applications and how they could be improved. Then available technologies are described, specifically HTML5 and Cocoa.
+Atmosphere is an attempt to create an integrated solution, that would improve user friendliness by caching objects locally. It should work on both web and Mac/iOS platforms, allow offline usage, and be open-source. Additionally, it should work with an existing REST server, so developers wouldn't have to rewrite their code from scratch.
 
-This thesis describes Atmosphere, a platform that improves user experience of web, mobile and desktop applications by storing remote objects in local database.
+This area is in very fast development. Building the whole application in JavaScript is still not a standard decision, mostly because limitations on the client side. (Old browsers, limited performance.) For this reason there are not too many solutions that would improve JavaScript applications. At the time when the work on Atmosphere was started there was practically no other solution that would offer similar benefits. This has changed very quickly, so this thesis has a chapter dedicated to alternative solutions. 
+
+The overall goal for Atmosphere is to provide a platform that would allow building very user friendly client applications with minimal effort. It is best-suited for cases when the sever code is already available.
+
+The first chapter defines cloud computing and individual types of cloud solutions. The next chapter talks about the current state of client applications and how they could be improved. Then available technologies are described, specifically HTML5 and Cocoa.
 
 The next part proposes high level design of Atmosphere. It discusses the basic idea of asynchronous interfaces, how local storage could be used, how to recover from failure and also what other design solutions were considered and why the one described was chosen.
 
