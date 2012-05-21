@@ -1,13 +1,17 @@
 \section{Conclusion}
 
-This thesis is focused on client applications for SaaS products. It starts by general analysis of these applications. The result is that there is still a lot of improvement space. Most of the applications require users to wait for network requests to finish, even when it's not needed. Also, only some of the application provide concurrent access by real-time data synchronization.
+The aim of this work was to describe all aspects of building Atmosphere, a data synchronization platform for web and Mac/iOS applications.
 
-Once the problem is defined, the thesis continues by analyzing available technologies that could be used to solve it. There are many new HTML5 features such as WebSockets and local storage that could be used for building Atmosphere. Building desktop applications is a viable solution too.
+The first chapters started by general analysis of the client applications, their strong and weak points. The result was that there is still a lot of space to improve, specifically in objects caching. Most of the applications require users to wait for network requests to finish, even when it's not needed. It was also concluded that only some of the applications provide concurrent access by exchanging data in real-time. This features should be supported by all applications and Atmosphere allows that.
 
-The next part introduces the basic ideas behind the design of Atmosphere. It is concluded that the design should allow working with an external REST API, it should cache objects locally and synchronize them in background by keeping track of changed objects. A high-level structure of the libraries is outlined too.
+Once the problem was defined, the thesis continued by analyzing related technologies. There are many new HTML5 features such as WebSockets, or local storage that are utilized by Atmosphere. Since Atmosphere is not only web applications platform, technologies in the area of desktop and mobile applications were analyzed too, specifically the Mac and iOS platforms.
 
-The framework is implemented for two environments, the web (JavaScript) and Mac/iOS (Cocoa). The details of this work, such as specific data structures and algorithms are described in the next chapter. The rest of the chapter describes implementation specifics for individual platforms.
+The next part introduced basic ideas behind the design of Atmosphere. Basic design decisions were concluded, such as that Atmosphere should allow working with an existing server application, it should cache objects locally and synchronize them in background by keeping track of changed objects. Also, a high-level layout of components was outlined.
 
-Next follows a brief description of how was Atmosphere used in three client applications for cloud services. The chapter contains real-world backing for some of the decisions made in the design phase, as well as description of new problems encountered while implementing these applications.
+The platform was implemented for two environments, the web (JavaScript) and Mac/iOS (Cocoa). The thesis contains details of these implementations, such as specific data structures and algorithms. Since the two platforms are very different, some platform specifics were described too.
 
-The work is concluded by comparing Atmosphere to other similar products. All of these products have existed for only a couple of months which shows that this area is under fast development.
+The part of the implementation work was to use the library in real-world software. Three applications with different technological background were built. The thesis contains real-world backing for some of the decisions made in the design phase, as well as description of new problems encountered while implementing these applications.
+
+The work was concluded by comparing Atmosphere to other similar products. None of these products existed before the work on Atmosphere started, which shows how fast is the development in the area of SaaS applications.
+
+Atmosphere is not the only project that uses local caching to improve user experience, but differs from others by the ability to use it with existing server and being open-source.
