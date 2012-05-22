@@ -4,8 +4,7 @@ This section starts by describing some important algorithms and implementation d
 
 \subsection{Classes, data structures and algorithms}
 
-
-This subsection describes data structures and algorithms used in JavaScript implementation. At the time of writing, the Cocoa implementation does not include all of the functionality described here.
+The following text describes data structures and algorithms used in JavaScript implementation.
 
 \subsubsection{Data structures}
 
@@ -26,7 +25,7 @@ Both implementations provide object-oriented system of code organization. Compon
 
 \subsubsection{Synchronizer}
 
-Synchronizer is the main class of Atmosphere. It lies on top of other classes, and other classes use it to accomplish tasks. Its method can be divided into following groups.
+Synchronizer is the main class of Atmosphere. It lies on top of other classes, and other classes use it to accomplish tasks. Its methods can be divided into following groups.
 
 \begin{enumerate}
 \item Object lifecycle
@@ -44,7 +43,7 @@ Synchronizer is the main class of Atmosphere. It lies on top of other classes, a
 
 \textbf{Fetching objects} and \textbf{making custom REST requests} forward the call to resource client. These are only convenience methods. Similarly, \textbf{marking object as changed or synchronized} methods are forwarded to the meta context.
 
-\textbf{Saving objects} allows specifying option which would make the saving 'synchronous'. In such case Atmosphere will immediately produce a save network request. When this option is set to false, the object is only marked as changed, and is synchronized in the next synchronization loop.
+\textbf{Saving objects} allows specifying option which would make the saving ``synchronous''. In such case Atmosphere will immediately produce a save network request. When this option is set to false, the object is only marked as changed, and is synchronized in the next synchronization loop.
 
 There are two purposes for this option: First, it disables offline usage. If the request fails, it will not be attempted again. Second, it is possible to pass options to such request. Note that asynchronous saving does not allow any options to be sent along with the save method. Making saving synchronous enables extra options, such as URL arguments or extra POST body.
 
