@@ -6,21 +6,21 @@ In order to build a framework like Atmosphere, a solid knowledge of available te
 
 HTTP (Hypertext Transfer Protocol) is one of the basic protocols of the World Wide Web. HTTP implements the request-response and the client-server model. Take example of user navigation to search engine. In such case, the user's web browser is the \textbf{client}, and the computer where search engine is stored is the \textbf{server}. Typing the URL and hitting return key creates a \textbf{request} which is sent to the server over HTTP. Server processes this request and generates a \textbf{response}. The response is sent back to client (the user's browser) which processes it and presents data to user.
 
-The request message is a short message containing the following: Method, path, headers and optional message body. Before we can discuss REST, it’s important to remind all HTTP methods. (GET and POST are the common ones, because they are supported by all browsers.)
+The request message is a short message containing the following: Method, path, headers and optional message body.
 
-Representational state transfer, or REST, is a style of architecture for HTTP interfaces. It's basic idea is that every object is represented as a resource. Actions can be performed on resources, such as index (will return list of all objects for specific entity), create (will create new record for entity), update (will update parameters of record) and delete (will remove a record). In REST, these actions are mapped to method and URL pairs. \citep{rails_way}
+Representational state transfer, or REST, is a style of architecture for HTTP interfaces. The basic idea behind REST is that every object is represented as a resource. Actions can be performed on resources, such as index (will return list of all objects for specific entity), create (will create new record for entity), update (will update parameters of record) and delete (will remove a record). In REST, these actions are mapped to method and URL pairs. \citep{rails_way}
 
-Atmosphere will act as client in the REST architecture. It will expect the source to be a RESTful HTTP interface, but still configurable. 
+Atmosphere will act as client in the REST architecture. It will expect the source to be a RESTful HTTP interface.
 
 \subsection{HTML5}
 
 Since Atmosphere relies heavily on HTML5 features, some of them will be described in this section. \citep{maccaw_js} \citep{html5_book} \citep{css3_book}
 
-HTML5 is the new version of HTML with support for all kinds of new features. The following sections will go through these features, discuss their use and support in the web browsers. Also, we’ll discuss how these features fit with Atmosphere and what use they can be made of.
+HTML5 is the new version of HTML with support for many new features. The following sections will go through these features, discuss their use and support in the web browsers. Another question is how these features fit with Atmosphere and what use can they be made of.
 
-Before it would be worth mentioning that by using HTML5 there is increased chance that the application won’t work correctly, or won’t work at all for some users. In a good application, users with old browsers would be informed about this and not allowed to use the application at all, instead of leading them into thinking the issues are caused by the application. 
+One aspect of new HTML5 feature is the browser support. By using HTML5 there is increased chance that the application will not work correctly, or will not work at all for some users with outdated browsers. In an ideal solution, users with old browsers are informed that their browser is not supported and are not allowed to use the application at all. If the application is allowed to be used with unsupported browsers, users might think it's broken instead of upgrading their software.
 
-Can be this problem solved in a more elegant manner? Is there any solution that would bring bring the new features to users with old browsers? That depends on what feature it is. For example, if the browser doesn’t support WebSockets (which is a real situation – Android web browser doesn’t support it.), then the push notifications should be disabled, but the application should work without them. That is of course the case if the application is not completely based on WebSockets. Atmosphere applies this concept of graceful degradation: If the WebSocket support is not present, it simply won’t be used, but the application will still work through the REST interface as normal.
+Can be this problem solved in a more elegant manner? Is there any solution that would bring bring the new features to users with old browsers? That depends on what feature it is. For example, if the browser doesn’t support WebSockets (which is a real situation – Android web browser doesn’t support it.), then the push notifications should be disabled, but the application should work without them. That is of course the case if the application is not completely based on WebSockets. Atmosphere applies this concept of graceful degradation: If the WebSocket support is not present, it simply won’t be used, but the application will still work through the REST interface as normal. \citep{javascript_bible_book}
 
 That was an example of degradable feature, there are more fundamental ones that simply require support. In that case there is no other solution than demanding user to upgrade their browser.
 
@@ -30,15 +30,15 @@ Another interesting solution is to bundle the application along with a modern br
 
 CSS3 allows advanced styling of interface elements without use of images. The main advantage is being able to change looks later in the development process without having to use an image editor. \citep{css3_book}
 
-\emph{Animations} generally improve user experience by visualizing the action performed by the user. With CSS3, animations can be rendered using JavaScript. That means, instead of computing properties for each frame of animations, it is the responsibility of web browser to render it. Some browsers use GPU to accelerate these animations, which makes the interface feel much more like a native application.
+\emph{Animations} generally improve user experience by visualizing the action performed by the user. With CSS3, animations can be rendered without using JavaScript. That means, instead of computing properties for each frame of animations, it is the responsibility of web browser to render it. Some browsers use GPU to accelerate these animations, which makes the interface feel much more like a native application.
 
 \emph{Border radius} is a simple feature that allows rendering elements with a border radius. 
 
-\emph{Shadows} allow rendering shadows as if cast by text (text-shadow) or a some element (box-shadow.) 
+\emph{Shadows} allow rendering shadows as if cast by text (text-shadow) or by some element (box-shadow).
 
-\emph{Flex box} is a feature for creating „flexible“ boxes, that means making elements automatically expand to some part of the screen. It allows building interfaces, that looks like native user interface instead of web page. The original solution was mostly absolute positioning or JavaScript that would automatically reposition elements whenever the window was resized. 
+\emph{Flex box} is a feature for creating ``flexible'' boxes, that means making elements automatically expand to some part of the screen. It allows building interfaces, that looks like native user interface instead of web page. The original solution was mostly absolute positioning or JavaScript that would automatically reposition elements whenever the window was resized. 
 
-\emph{Font face} allows using custom fonts and is already widely used. There are services, such as Typekit or Google Web Fonts, that let developers use any font from their collection by simply including short stylesheet in the page. 
+\emph{Font face} allows using custom fonts and is already widely used. There are services, such as Typekit \citep{typekit} or Google Web Fonts, \citep{google_webfonts} that let developers use any font from their collection by simply including short stylesheet in the page. 
 
 \emph{Gradients} allow styling elements with gradients without having to use images.
 
@@ -46,19 +46,11 @@ Atmosphere doesn’t directly require any of these features as it is not working
 
 \subsubsection{Geolocation}
 
-Some HTML5 browsers support geolocation – a programming interface that lets web application request current location of the user, after user allows the application to access it. It is easy to gracefuly degrade when this feature is not available.
-
-It is available on most of the mobile devices. 
-
-Atmosphere doesn’t use this feature in any way.
+Some HTML5 browsers support geolocation – a programming interface that lets web application request current location of the user, after user allows the application to access it. It is easy to gracefully degrade when this feature is not available. It is available on most of the mobile devices. Atmosphere does not use this feature in any way.
 
 \subsubsection{Canvas}
 
-Canvas is a HTML5 element that allows dynamic rendering of vector objects and bitmaps. It is commonly used in graphic applications.
-
-It is supported in all browsers, except Internet Explorer supports it only from version 9.0.
-
-Atmosphere doesn’t use the canvas element.
+Canvas is a HTML5 element that allows dynamic rendering of vector objects and bitmaps. It is commonly used in graphic applications. It is supported in all browsers, except Internet Explorer, which supports it only from version 9.0. Atmosphere does not use the canvas element.
 
 \subsubsection{WebGL}
 
@@ -102,19 +94,19 @@ WebSockets is an extension of HTTP protocol. WebSockets hide the low level netwo
 
 WebSockets are most commonly used in web browsers, but not limited to. There are client libraries in languages such us Objective-C or Java, so they can be used in native iOS or Android applications.
 
-The server part can be written in any language. There are servers written in Ruby, PHP, Java and others. But there is one server side environment that is favorite amongst many developers who use WebSockets. It’s Node.js, the environment that uses JavaScript as server language. Thanks to Node.js it’s possible to write server and client side for WebSockets in the same language with very similar API.  
+The server part can be written in any language. There are servers written in Ruby, PHP, Java and others. One server environment, Node.js, uses JavaScript as the server language. Thanks to Node.js it is possible to write server and client side (that utilizes WebSockets) in the same language with very similar API.
 
-WebSockets are supported in all current version of browsers. For Atmosphere, that would suffice, because the application can work without WebSockets, it would gracefully degrade to work without notifications. There are of course countless web applications that are based on WebSockets, that couldn’t work without them. There’s a library for this very purpose: Socket.IO. \citep{socketio}
+WebSockets are supported in all current browsers. For Atmosphere, that would be sufficient, because the application can work without WebSockets. Without WebSockets it would gracefully degrade to work without the notifications. But notifications work also without WebSockets by using Socket.IO. \citep{socketio}
 
 \emph{``Socket.IO aims to make realtime apps possible in every browser and mobile device, blurring the differences between the different transport mechanisms. It's care-free realtime 100\% in JavaScript.''} \citep{socketio}
 
-The idea behind Socket.IO is to use WebSocket when available and gracefully downgrade to other workarounds for push notifications in the brower. These include Flash file bridged with JavaScript, AJAX long polling and others. To use Socket.IO, a library needs to be included on both client and server side. With Socket.IO library the server side is expected to be written in JavaScript on Node.js, but there are other third party libraries that work in other environments.
+The idea behind Socket.IO is to use WebSocket when available and gracefully downgrade to other solutions for push notifications in the browser. These include Flash file, bridged with JavaScript, AJAX long polling and others. To use Socket.IO, a library needs to be included on both client and server side. With Socket.IO library the server side is expected to be written in JavaScript on Node.js, but there are other third party libraries that work in other environments.
 
-Atmosphere uses Socket.IO which allows for notifications to work practically in any browser. (Internet Explorer 5.5+, Safari 3+, Google Chrome 4+, Firefox 3+, Opera 10.61+).
+Atmosphere uses Socket.IO and that allows notifications to work in most of the browsers available. (Internet Explorer 5.5+, Safari 3+, Google Chrome 4+, Firefox 3+, Opera 10.61+).
 
 \subsubsection{Cache Manifest (Offline Applications)}
 
-Cache Manifest is a feature that allows accessing a web application without active network connection. In order to implement cache manifest, a list of all resources that application require to work must be create and exposed using the cache manifest API. This will cause browser to store the resources for offline usage.
+Cache Manifest is a feature that allows accessing a web application without active network connection. In order to implement cache manifest, a list of all resources that application require to work must be created and exposed using the cache manifest API. This will cause browser to store the resources for offline usage.
 
 One of the effects is that the next time the web application is used, these resources will be loaded locally making the web application load instantly.
 
