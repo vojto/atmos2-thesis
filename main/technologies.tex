@@ -20,7 +20,7 @@ HTML5 is the new version of HTML with support for many new features. The followi
 
 One aspect of new HTML5 feature is the browser support. By using HTML5 there is increased chance that the application will not work correctly, or will not work at all for some users with outdated browsers. In an ideal solution, users with old browsers are informed that their browser is not supported and are not allowed to use the application at all. If the application is allowed to be used with unsupported browsers, users might think it's broken instead of upgrading their software.
 
-Can be this problem solved in a more elegant manner? Is there any solution that would bring bring the new features to users with old browsers? That depends on what feature it is. For example, if the browser doesn’t support WebSockets (which is a real situation – Android web browser doesn’t support it.), then the push notifications should be disabled, but the application should work without them. That is of course the case if the application is not completely based on WebSockets. Atmosphere applies this concept of graceful degradation: If the WebSocket support is not present, it simply won’t be used, but the application will still work through the REST interface as normal. \citep{javascript_bible_book}
+Can be this problem solved in a more elegant manner? Is there any solution that would bring bring the new features to users with old browsers? That depends on what feature it is. For example, if the browser does not support WebSockets (which is a real situation – Android web browser does not support it.), then the push notifications should be disabled, but the application should work without them. That is of course the case if the application is not completely based on WebSockets. Atmosphere applies this concept of graceful degradation: If the WebSocket support is not present, it simply will not be used, but the application will still work through the REST interface as normal. \citep{javascript_bible_book}
 
 That was an example of degradable feature, there are more fundamental ones that simply require support. In that case there is no other solution than demanding user to upgrade their browser.
 
@@ -42,7 +42,7 @@ CSS3 allows advanced styling of interface elements without use of images. The ma
 
 \emph{Gradients} allow styling elements with gradients without having to use images.
 
-Atmosphere doesn’t directly require any of these features as it is not working with the interface directly.  
+Atmosphere does not directly require any of these features as it is not working with the interface directly.  
 
 \subsubsection{Geolocation}
 
@@ -54,11 +54,11 @@ Canvas is a HTML5 element that allows dynamic rendering of vector objects and bi
 
 \subsubsection{WebGL}
 
-WebGL is a JavaScript extension that allows generation of interactive 3D graphics by sending instructions directly to GPU. It’s based on OpenGL ES 2.0. 
+WebGL is a JavaScript extension that allows generation of interactive 3D graphics by sending instructions directly to GPU. It is based on OpenGL ES 2.0. 
 
 In supported browsers, WebGL is automatically enabled if user hardware is compatible. WebGL is  supported in version 9.0 and newer of Google Chrome, 4.0 and newer of Mozilla Firefox, 5.1 and newer of Safari (altough Safari has WebGL disabled by default.) As of time of writing, it is not supported by Internet Explorer. 
 
-Atmosphere doesn’t use this feature either.
+Atmosphere does not use this feature either.
 
 \subsubsection{Audio}
 
@@ -70,7 +70,7 @@ Audio has been around for longer than other features and is currently supported 
 
 Local storage is the one feature that used to make desktop application superior to web application in many cases. In the years 2000 to 2009 there have been many attempts to somehow add local storage to web applications. These include userData of Internet Explorer (part of DHTML Behaviors), Local Shared Objects of Adobe Flash and bridges with JavaScript, and SQLite databases provided by Google Gears.
 
-HTML5 brings a new feature, Local Storage or sometimes called Web Storage. Websites can store up to 5MB of data in key/value pairs and even more after demanding user’s permission. Local Storage is supported by all major browsers, including Internet Explorer from version 8.0. It is also supported on mobile browsers, both Android (2.0 and up) and iPhone (2.0 and up.). 
+HTML5 brings a new feature, Local Storage or sometimes called Web Storage. Websites can store up to 5MB of data in key/value pairs and even more after demanding user's permission. Local Storage is supported by all major browsers, including Internet Explorer from version 8.0. It is also supported on mobile browsers, both Android (2.0 and up) and iPhone (2.0 and up.). 
 
 Local Storage is thus a reliable way of storing application data on the client side. Atmosphere uses it to store local objects. 
 
@@ -84,9 +84,9 @@ Unfortunately, WebSQL is not supported by Internet Explorer or Mozilla Firefox. 
 
 There is another solution, IndexedDB, which differs from WebSQL in API. Instead of writing SQL requests manually, it provides a JavaScript API to manipulate objects. Mozilla has implemented this database in version 4.0 of Firefox, it is also partially supported by Google Chrome 11.
 
-Since not of these database is fully supported, Atmosphere doesn’t use either. Instead, applications should execute complicated database requests on the server and use REST API to retreive a subset of resources relevant to the user thus minimalizing complexity of client-side database requests making key-value storage sufficient.
+Since not of these database is fully supported, Atmosphere does not use either. Instead, applications should execute complicated database requests on the server and use REST API to retrieve a subset of resources relevant to the user thus minimizing complexity of client-side database requests making key-value storage sufficient.
 
-Client-side SQL databases will be an interesting solution, and as they become a feature that’s supported on all platforms Atmosphere will try to use them. Until then we’ll stick with Local Storage.
+Client-side SQL databases will be an interesting solution, and as they become a feature that is supported on all platforms Atmosphere will try to use them. For now the support is very limited and Atmosphere will rely on local storage instead.
 
 \subsubsection{Websockets}
 
@@ -110,25 +110,25 @@ Cache Manifest is a feature that allows accessing a web application without acti
 
 One of the effects is that the next time the web application is used, these resources will be loaded locally making the web application load instantly.
 
-Using cache manifest also allows web application to be used offline without any internet connection at all. Atmosphere makes this possible by storing all objects locally. When user alters an object, it’s only marked as changed and pushed to the server the next time internet connection is available. 
+Using cache manifest also allows web application to be used offline without any internet connection at all. Atmosphere makes this possible by storing all objects locally. When user alters an object, it is only marked as changed and pushed to the server the next time internet connection is available. 
 
-By using both cache manifest and Atmosphere it’s possible to build web applications that simply work offline. 
+By using both cache manifest and Atmosphere it is possible to build web applications that simply work offline. 
 
-\subsubsection{Conclusion}
+\subsubsection{Other features}
 
-Features listed here hardly include all of the ever evolving features of HTML5. We focused on the clue feature for Atmosphere, but we mentioned most of the features that could help building a next generation web application.
+Features listed here hardly include all of the ever evolving features of HTML5. The technologies analysis is focus on features that could be used in Atmosphere, also other features are mentioned too, features that could help building a next generation web application.
 
 \subsection{PhoneGap and MacGap}
 
 \emph{``PhoneGap is an HTML5 app platform that allows you to author native applications with web technologies and get access to APIs and app stores. PhoneGap leverages web technologies developers already know best... HTML and JavaScript.''} \citep{phonegap}
 
-PhoneGap is a platform for wrapping HTML5 application into native packages. MacGap is an extension of PhoneGap that allows doing the same with desktop applications. MacGap works only on Mac computers.  There is a couple of interesting consequences of using these platforms.
+PhoneGap is a platform for wrapping HTML5 application into native packages. MacGap is an extension of PhoneGap that allows doing the same with desktop applications. MacGap works only on Mac computers.
 
-The first one is obvious. PhoneGap allows accessing native features of the device with JavaScript API. This connection is made using bridge between native code and UI element responsible for displaying the web page. (Usually called a WebView.) It’s possible to use some native features, such as accelerometer, camera or compass. Lower level features are available too: Files, media, storage, notifications. 
+PhoneGap allows accessing native features of the device with JavaScript API. This connection is made using bridge between native code and UI element responsible for displaying the web page. (Usually called a WebView.) It is possible to use some native features, such as accelerometer, camera or compass. Lower level features are available too: Files, media, storage, notifications. 
 
-Second is related to the way user perceive software. They are used to web applications being slow and unresponsive. Native applications, on the other hand, they perceive as fast and easy to use. Today it’s possible to build apps based on HTML5 (if built correctly), that are almost as good as native apps. When users are aware that they are dealing with a web application, not a native one, they expect the application to be slow and unresponsive, like they are used to with almost all web applications. 
+Users are used to web applications being slow and unresponsive. Native applications, on the other hand, are perceived as fast and easy to use. Today it is possible to build applications based on HTML5, that are almost as good as native applications.
 
-Disguising a well-made web application as a native application may result into user believing they’re working with a native app, especially when the user is not too technical.
+PhoneGap and MacGap helps disguising a well-made web application as a native application, which may result into user believing they are working with a native app. When users are aware that they are dealing with a web application, not a native one, they expect the application to be slow and unresponsive, but on the other hand, when they believe it's a native application, they expect it to be fast.
 
 An example is recently released LinkedIn iPad application of which 95\% is built with HTML5 instead of native technologies. (Shown in Figure \ref{fig:linkedin}.) \citep{linkedin_ipad}
 
@@ -139,24 +139,24 @@ An example is recently released LinkedIn iPad application of which 95\% is built
   \label{fig:linkedin}
 \end{figure}
 
-The last reason is the ability to publish application in the App Store or Android Market. For Apple platform, App Store is the only way to distribute software (except for jailbroken devices.) For Android platform, it is possible to install applications from other sources than the Market, but in both cases having an application exposed in the App Store/Market helps uses find it, and increases downloads or sales.
+The last reason is the ability to publish application in the App Store or Android Market. For Apple platform, App Store is the only way to distribute software (except for jailbroken devices.) For Android platform, it is possible to install applications from other sources than the Market, but in both cases having an application exposed in the App Store/Market helps users find it, and increases downloads or sales.
 
-Atmosphere doesn’t use these platforms in a direct way, but developer is encouraged to use them. 
+Atmosphere does not use these platforms in a direct way, but some of the example applications are packaged using PhoneGap or MacGap and it helps achieving the overall goal - it improves the user experience.
 
 \subsection{Cocoa}
 
 Cocoa is a platform for developing Mac desktop and iOS mobile applications. The implementation of Atmosphere includes libraries for this platform.
 
-Cocoa allows building native application using the Objective-C language and a tool called Interface Builder. This two allow developer to instantiate objects and graphically layout interface elements. All of the objects are then archived, frozen in place. When the interface file is loaded, the contents are unarchived, but not instantiated.
+Cocoa allows building native applications using the Objective-C language and a tool called Interface Builder. \citep{cocoa_hilegass} This two allow developer to instantiate objects and graphically layout interface elements. All of the objects are then archived, frozen in place. When the interface file is loaded, the contents are unarchived, but not instantiated.
 
-Cocoa provides basic elements to build both desktop and mobile applications. On desktop, forms elements, tables, collections and others are available. Mobile version contains different views made for touch devices. Also, the mobile version is extended by the touch framework for recognizing touch gestures, and other features specific for mobile devices.
+Cocoa provides basic elements to build both desktop and mobile applications. On desktop, forms elements, tables, collections and other user interface elements are available. Mobile version contains different views made for touch devices. Also, the mobile version is extended by the touch framework for recognizing touch gestures, and other features specific for mobile devices.
 
-Organization of code is usually done within the MVC pattern. For the model layer there is the Core Data library, that acts as peristance framework. The desktop version of Cocoa supports data bindings that automatically upate interfaces elements according to changes to models. This feature significantly reduces glue code in the controllers.
+The code is usually organized according to the MVC pattern. For the model layer, Core Data is used. Core Data is a library, that acts as persistence framework. The desktop version of Cocoa supports data bindings that automatically update interfaces elements according to changes to models. This feature significantly reduces glue code in the controllers.
 
-Another  very common pattern used by Cocoa is the observer pattern. There is notification center object, usually one for the application, which any objects can use to subscribe to notifications, or post notifications to. 
+Another  very common pattern used by Cocoa is the observer pattern. Cocoa provides the notification center, which is an object, usually one for the application, that any objects can use to subscribe to notifications, or post notifications to. 
 
-Core Data library persists special objects called managed objects into file or a database.  It manages attributes and relations of objects. Core Data uses fixed data schema which can be defined using a file or programatically. This is different from HTML5 as Core Data objects have fixed schema, and HTML5 are just objects serialized into key value storage. With Core Data it is of course possible to write more complicated applications with more complicated requests, because it can use SQLite as storage mechanism.
+Objects that are to be stored using Core Data are called managed objects and are persisted into file or a database. Core Data manages attributes and relations of objects. Core Data uses fixed data schema which can be defined using a file or programatically. This is different from HTML5 as Core Data objects have fixed schema, and HTML5 are just objects serialized into key value storage. With Core Data it is possible to write more complicated applications with more complicated requests, because it can use SQLite as storage mechanism.
 
 Atmosphere library sits on top of Core Data and adds automatic networking. Fetching or synchronizing objects can be triggered manually, or by watching  for changes using the notification center. (Observer pattern.)
 
-Cocoa is a very deep framework with many features. This section is just an introduction to basic concepts and features that are later utilized by Atmosphere. 
+Cocoa is a fairly complex framework with many features. This chapter is an introduction to basic concepts and features of Cocoa that are later utilized by Atmosphere. 

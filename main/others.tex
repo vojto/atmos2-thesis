@@ -11,25 +11,25 @@ The problem with this approach is that if the developer already knows a UI frame
 
 It provides a database-like API on the client side. Client-side code can manipulate objects in the application directly. Changes made to objects are propagated to other clients automatically in real-time using WebSockets.
 
-The server side is written in Node.js and the documentation \citep{meteor_doc} doesn't mention any means of implementing custom logic on the server side. That, first of all, represents a security risk. The client makes changes directly to database objects. Client is written in JavaScript and since it is not a compiled language, it can be changed by user at any time. Therefore, client can change database objects directly, which can become an issue if application is used by multiple users.
+The server side is written in Node.js and the documentation \citep{meteor_doc} does not mention any means of implementing custom logic on the server side. That, first of all, represents a security risk. The client makes changes directly to database objects. Client is written in JavaScript and since it is not a compiled language, it can be changed by user at any time. Therefore, client can change database objects directly, which can become an issue if application is used by multiple users.
 
-Secondly, using this approach could result in unexpected state of objects in case of network failure. For example, single action may create two interdependent objects. If one of these requests fails, there is one object which depends on another objects, which doesn't exist.
+Secondly, using this approach could result in unexpected state of objects in case of network failure. For example, single action may create two interdependent objects. If one of these requests fails, there is one object which depends on another objects, which does not exist.
 
 If these two objects were created in a server procedure called using one request, it would assure that either both or none of the objects are created.
 
-Meteor uses MongoDB to store its data. Meteor doesn't provide a library for Cocoa, or any other desktop or mobile platform. It is open-source and its source code is released under MIT license.
+Meteor uses MongoDB to store its data. Meteor does not provide a library for Cocoa, or any other desktop or mobile platform. It is open-source and its source code is released under MIT license.
 
 \subsection{Firebase}
 
-Firebase \citep{firebase} is a product similar to Meteor. The key difference is that it doesn't provide a whole framework for building JavaScript applications, but only the data layer.
+Firebase \citep{firebase} is a product similar to Meteor. The key difference is that it does not provide a whole framework for building JavaScript applications, but only the data layer.
 
 This allows using existing JavaScript applications written in other frameworks and adding Firebase data layer. The data binding is done by attaching callbacks to Firebase data layer. Existing application with its own custom UI logic first attaches a callback to be called when Firebase data changes, and then is notified of changes so it could display the current state.
 
-Another difference between Meteor and Firebase is that Firebase requires users to use their hosting to store the data. It is not open source and it does not provide a way to self-host the data. It is founded by YCombinator \citep{ycombinator} and other angel investors. It also doesn't provide a library for other than web platform.
+Another difference between Meteor and Firebase is that Firebase requires users to use their hosting to store the data. It is not open source and it does not provide a way to self-host the data. It is founded by YCombinator \citep{ycombinator} and other angel investors. It also does not provide a library for other than web platform.
 
 \subsection{Simperium}
 
-Simperium is a project that is very similar to Firebase. It also doesn't provide a whole JavaScript framework, only data layer.
+Simperium is a project that is very similar to Firebase. It also does not provide a whole JavaScript framework, only data layer.
 
 Similarly to Meteor and Firebase, Simperium provides real-time object synchronization. One very powerful difference is built-in operational transformation. \citep{ot} This allows sending only the portions of data that have changes which improves performance dramatically when dealing one larger objects. Also it adds automatic resolution of conflicts: If two users change one object, their both changes will be preserved.
 

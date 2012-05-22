@@ -46,7 +46,7 @@ Synchronizer is the main class of Atmosphere. It lies on top of other classes, a
 
 \textbf{Saving objects} allows specifying option which would make the saving 'synchronous'. In such case Atmosphere will immediately produce a save network request. When this option is set to false, the object is only marked as changed, and is synchronized in the next synchronization loop.
 
-There are two purposes for this option: First, it disables offline usage. If the request fails, it will not be attempted again. Second, it is possible to pass options to such request. Note that asynchronous saving doesn't allow any options to be sent along with the save method. Making saving synchronous enables extra options, such as URL arguments or extra POST body.
+There are two purposes for this option: First, it disables offline usage. If the request fails, it will not be attempted again. Second, it is possible to pass options to such request. Note that asynchronous saving does not allow any options to be sent along with the save method. Making saving synchronous enables extra options, such as URL arguments or extra POST body.
 
 \textbf{Synchronization} contains logic for looking up changed objects in meta context, deciding whether to send a create or update request, and finally calling the save method of resource client.
 
@@ -102,7 +102,7 @@ Atmosphere needs some extra attributes, such as 'is changed' or 'is local only'.
 
 At the time of writing, JavaScript implementation of Atmosphere is built on top of the Spine \citep{spinejs} library which is a lightweight framework for building JavaScript web applications.
 
-The library doesn’t completely rely on Spine, instead it only utilizes its model layer. Furthermore, all the code that requires Spine is contained in one small file (application context), which can be easily rewritten for other client side frameworks and their own model layers.
+The library does not completely rely on Spine, instead it only utilizes its model layer. Furthermore, all the code that requires Spine is contained in one small file (application context), which can be easily rewritten for other client side frameworks and their own model layers.
 
 The implementation is written in CoffeeScript \citep{coffeescript}, which is a language that improves syntax of JavaScript by introducing many syntactic shortcuts such as semantic whitespace (inspired by Python) or accessing instance variables with the '@' sign. (inspired by Ruby).
 

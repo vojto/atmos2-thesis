@@ -16,7 +16,7 @@ When the data are stored on the server, they are stored more safely than on user
 
 In the cloud architecture, client is the device that connects to the internet to access software in the cloud. Client application is software that runs on client and communicates with the cloud service. In SaaS, the client application is often delivered in form of web application: User can access it using their browser.
 
-However, a web application is not the only solution. For example, on iPhone platform, web applications are limited, they can’t access some hardware features, such as camera. Native applications support these features, and those can be installed via App Store. So a client application can either be a website, or it can be a native application that requires installation.
+However, a web application is not the only solution. For example, on iPhone platform, web applications are limited, they cannot access some hardware features, such as camera. Native applications support these features, and those can be installed via App Store. So a client application can either be a website, or it can be a native application that requires installation.
 
 If there's a native application, in the SaaS business model it is usually free: The company charges users for using the service, not for installing software. If user downloads the free application, but is not subscribed to the service, they are not able to use it.
 
@@ -32,7 +32,7 @@ This is not a case for social networks, for example. Social networks have millio
 
 It seems that user experience is generally better with desktop application rather than web applications. The first reason is that the whole user interface is operating on the client side: That means only the data is transferred through the network. Some desktop applications even use local storage to cache the local data.
 
-The only problem left to solve is the case when application doesn't work with local data, but always makes networks requests, blocking the interface, needlessly making user wait.
+The only problem left to solve is the case when application does not work with local data, but always makes networks requests, blocking the interface, needlessly making user wait.
 
 The desktop library of Atmosphere solves this problem by providing a library that extends local storage framework and adds transparent networking without interface blocking. 
 
@@ -52,11 +52,11 @@ Mobile applications have become very popular. \citep{facebook_stats} Compared to
 
 There is a mobile framework RestKit \citep{restkit} that solves a similar problem as Atmosphere for iOS and Mac applications. Its first feature is to simplify working with REST interfaces, but in addition it provides a way of caching remote objects in local storage, similarly to Atmosphere.
 
-The only flaw of this framework is that it doesn’t support creating objects locally, when there’s no internet connection. Atmosphere solves this problem by tracking local changes all the time, no matter if user has internet connection or not, and synchronizing them with the web service when the internet connection is available.
+The only flaw of this framework is that it does not support creating objects locally, when there is no internet connection. Atmosphere solves this problem by tracking local changes all the time, no matter if user has internet connection or not, and synchronizing them with the web service when the internet connection is available.
 
-Notifications are supported on mobile platforms in different ways. On iOS there’s a central notification system, that is managed by Apple infrastructure. \citep{iphone_ipad_book} The application is not responsible for managing open connection to receive notifications, instead when an event occurs on the server side, it notifies the Apple notification service that then delivers notification to the client. This solution is superior to managing connection by every client connection individually. First, it saves the memory footprint, CPU usage, thus it saves battery life. Secondly, the code responsible for managing the connection is provided and well tested by Apple. Network programming is a very unstable, so it would take a lot of effort to come up with solution as reliable as Apple’s. 
+Notifications are supported on mobile platforms in different ways. On iOS there is a central notification system, that is managed by Apple infrastructure. \citep{iphone_ipad_book} The application is not responsible for managing open connection to receive notifications, instead when an event occurs on the server side, it notifies the Apple notification service that then delivers notification to the client. This solution is superior to managing connection by every client connection individually. First, it saves the memory footprint, CPU usage, thus it saves battery life. Secondly, the code responsible for managing the connection is provided and well tested by Apple. Network programming is a very unstable, so it would take a lot of effort to come up with solution as reliable as Apple's. 
 
-Atmosphere won’t deal with push notifications in a way of receiving notifications when application is not active. But it will apply the same solution of updating objects as soon as they are changed on a different machine to mobile applications. 
+Atmosphere will not deal with push notifications in a way of receiving notifications when application is not active. But it will apply the same solution of updating objects as soon as they are changed on a different machine to mobile applications. 
 
 \subsection{Web applications}
 
@@ -66,7 +66,7 @@ One of the issues of the current web applications is that most of them is just a
 
 That requires most of the logic (including fronted logic - logic responsible for rendering user interfaces) on the server side while only the results of requests are delivered to user. This concept is old \citep{html_history} and is being replaced by JavaScript-heavy client side applications that have their own logic, especially for the user interface. They make requests only when necessary - to transfer only the data, not HTML.
 
-This thesis doesn’t explore all of the possible solutions of achieving this goal because there are many various options. Instead, Atmosphere assumes the developer has or is building a JavaScript application.
+This thesis does not explore all of the possible solutions of achieving this goal because there are many various options. Instead, Atmosphere assumes the developer has or is building a JavaScript application.
 
 Moving logic to the client side is a great improvement itself. Still there are the same problems as mentioned before. For example, TaskDo (one of Atmosphere-based applications, that were build along with the framework), provides an easy way to access user's tasks in Google Tasks. The simple interface consists of two screens: List of ``task lists'' and list of tasks in the list.
 
