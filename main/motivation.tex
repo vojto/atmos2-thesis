@@ -8,8 +8,6 @@ That makes development and use of software better in many ways: Web applications
 
 When the data are stored on the server, they are stored more safely than on user's hard drive. It also allows data sharing and communication between users.
 
-\subsection{Client applications}
-
 \begin{figure}[ht!]
 \centering
 \includegraphics{Motivation_1.png}
@@ -24,7 +22,7 @@ If there's a native application, in the SaaS business model is usually free: It 
 
 Atmosphere tries to improve these client applications and make their development faster. The next sections will discuss the current state of client applications.
 
-\subsubsection{Desktop applications}
+\subsection{Desktop applications}
 
 With SaaS becoming a popular model for software business, companies focus less on desktop applications. Instead, they build services that work online and the clients use web interface to access these services.
 
@@ -40,27 +38,27 @@ The desktop library of Atmosphere solves this problem by providing a library tha
 
 One last type of desktop applications are those with purpose of notifying users of events. Should an event occur in a web application, the only way of immediately notifying user is via email. These emails tend to get very annoying after time, so user start creating filters that hide them from the inbox, which partly defies the purpose.
 
-A better way of notifying users is to provide a desktop application they can launch and quit. Part of Atmosphere is the notification server which together with client libraries allow instant notifications for events that occured in the application. 
+A better way of notifying users is to provide a desktop application they can launch and quit. Part of Atmosphere is the notification server which together with client libraries allow instant notifications for events that occurred in the application. 
 
-\subsubsection{Mobile applications}
+\subsection{Mobile applications}
 
-Mobile applications became a very important part of any SaaS. It is time when many users own smartphones with constant connection to the Internet, and they expect every service to provide a mobile application, that would allow them to perform the basic  tasks using a simplified user interface. 
+Mobile applications became a very important part of any SaaS. It is the time when many users own smartphones with constant connection to the Internet, and they expect every service to provide a mobile application, that would allow them to perform the basic tasks using a simplified user interface. \citep{facebook_stats}
 
-Mobile applications are usually a top priority when a new SaaS product is shipped. Regular, web-based product is unusable on a small mobile phone. A special, mobile version of the site could solve the problem, but compared to native mobile apps, these lack a great deal of responsiveness and speed.
+Mobile applications have often high priority when a new SaaS product is shipped. In many cases a special, mobile version of the site could solve the problem, but compared to native mobile apps, these lack a great deal of responsiveness and speed.
 
-Also, a native mobile application provides access to hardware-specific features, such as the the camera, GPS, the accelometers, multi-touch event handling, and others. 
+Also, a native mobile application provides access to hardware-specific features, such as the the camera, GPS, the accelerometers, multi-touch event handling, and others.
 
-So what problems do the mobile applications have. Ironically, it seems that these are most evolved. Compared to desktop applications, they are built a lot more frequently. Compared to web applications, they are much more responsive and faster. 
+Mobile applications have become very popular. \citep{facebook_stats} Compared to desktop applications, they are developed a lot more frequently. Compared to web applications, native mobile applications are much more responsive and faster.
 
-There is even an excellent framework RestKit [10] that allows building iOS applications based on REST web services. It also provides a way of caching retrieved data in a local database.
+There is a mobile framework RestKit \citep{restkit} that solves a similar problem as Atmosphere. Its first feature is to simplify working with REST interfaces, but in addition it provides a way of caching remote objects in local storage, similarly to Atmosphere.
 
-The only flaw of this framework is that it doesn’t support creating objects locally, when there’s no internet connection, and then synchronizing with the web service. Atmosphere solves this problem by tracking local changes all the time, no matter if user has internet connection or not, and synchronizing them with the web service when there is connection available.
+The only flaw of this framework is that it doesn’t support creating objects locally, when there’s no internet connection. Atmosphere solves this problem by tracking local changes all the time, no matter if user has internet connection or not, and synchronizing them with the web service when there is connection available.
 
-Notifications are supported on mobile platforms in different ways. On iOS there’s a central notification system, that is managed by Apple infrastructure. The application is not responsible for managing open connection to receive notifications, instead when an event occures on the server side, it notifies the Apple notification service that then delivers notification to the client. This solution is superior to managing connection by every client connection individually. First, it saves the memory footprint, CPU usage, thus it saves battery life. Secondly, the code responsible for managing the connection is provided and well tested by Apple. Network programming is a very unstable, so it would take a lot of effort to come up with solution as reliable as Apple’s. 
+Notifications are supported on mobile platforms in different ways. On iOS there’s a central notification system, that is managed by Apple infrastructure. The application is not responsible for managing open connection to receive notifications, instead when an event occurs on the server side, it notifies the Apple notification service that then delivers notification to the client. This solution is superior to managing connection by every client connection individually. First, it saves the memory footprint, CPU usage, thus it saves battery life. Secondly, the code responsible for managing the connection is provided and well tested by Apple. Network programming is a very unstable, so it would take a lot of effort to come up with solution as reliable as Apple’s. 
 
 Atmosphere won’t deal with push notifications in a way of receiving notifications when application is not active. But it will apply the same solution of updating objects as soon as they are changed on a different machine to mobile applications. 
 
-\subsubsection{Web applications}
+\subsection{Web applications}
 
 There is one significant difference between desktop/mobile apps and those that run in a browser. Native apps ship a package of client code that needs to be installed and run on the client platform. Web applications, in contrast, can run anywhere without any installation.
 

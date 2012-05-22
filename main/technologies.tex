@@ -1,5 +1,7 @@
 \section{Technologies}
 
+In order to build a framework like Atmosphere, a solid knowledge of available technologies is required. This chapter will analyze the basic technologies on which SaaS applications are built, then it will discuss new technologies and how could Atmosphere benefit from them.
+
 \subsection{HTTP and REST}
 
 HTTP (Hypertext Transfer Protocol) is one of the basic protocols of the World Wide Web. HTTP implements the request-response and the client-server model. Take example of user navigation to search engine. In such case, the user's web browser is the \textbf{client}, and the computer where search engine is stored is the \textbf{server}. Typing the URL and hitting return key creates a \textbf{request} which is sent to the server over HTTP. Server processes this request and generates a \textbf{response}. The response is sent back to client (the user's browser) which processes it and presents data to user.
@@ -12,7 +14,7 @@ Atmosphere will act as client in the REST architecture. It will expect the sourc
 
 \subsection{HTML5}
 
-Since Atmosphere relies heavily on HTML5 features, some of them will be described in this section. 
+Since Atmosphere relies heavily on HTML5 features, some of them will be described in this section. \citep{maccaw_js} \citep{html5_book} \citep{css3_book}
 
 HTML5 is the new version of HTML with support for all kinds of new features. The following sections will go through these features, discuss their use and support in the web browsers. Also, we’ll discuss how these features fit with Atmosphere and what use they can be made of.
 
@@ -26,9 +28,9 @@ Another interesting solution is to bundle the application along with a modern br
 
 \subsubsection{CSS3}
 
-CSS3 allows advanced styling of interface elements without use of images. The main advantage is being able to change looks later in the development process without having to use an image editor.
+CSS3 allows advanced styling of interface elements without use of images. The main advantage is being able to change looks later in the development process without having to use an image editor. \citep{css3_book}
 
-\emph{Animations} generally improve user experience by visualizing the action performed by the user. With CSS3, animations can be rendered using JavaScript. That means, instead of computing properties for each frame of animations, it is the responsibility of web browser to render it. Some browsers use GPU to accelerate these animations, which makes the interface feel much more like a native application. 
+\emph{Animations} generally improve user experience by visualizing the action performed by the user. With CSS3, animations can be rendered using JavaScript. That means, instead of computing properties for each frame of animations, it is the responsibility of web browser to render it. Some browsers use GPU to accelerate these animations, which makes the interface feel much more like a native application.
 
 \emph{Border radius} is a simple feature that allows rendering elements with a border radius. 
 
@@ -128,15 +130,15 @@ Features listed here hardly include all of the ever evolving features of HTML5. 
 
 \emph{``PhoneGap is an HTML5 app platform that allows you to author native applications with web technologies and get access to APIs and app stores. PhoneGap leverages web technologies developers already know best... HTML and JavaScript.''} \citep{phonegap}
 
-PhoneGap is a platform for wrapping HTML5 application into native packages. MacGap is an extension of PhoneGap that allows doing the same with desktop applications. MacGap works only on Mac computers.  There is a couple of interesting consenquences of using these platforms.
+PhoneGap is a platform for wrapping HTML5 application into native packages. MacGap is an extension of PhoneGap that allows doing the same with desktop applications. MacGap works only on Mac computers.  There is a couple of interesting consequences of using these platforms.
 
-The first one is obvious. PhoneGap allows accessing native features of the device with JavaScript API. This connection is made using bridge between native code and UI element responsible for displaying the web page. (Usually called a WebView.) It’s possible to use some native features, such as accelometer, camera or compass. Lower level features are available too: Files, media, storage, notifications. 
+The first one is obvious. PhoneGap allows accessing native features of the device with JavaScript API. This connection is made using bridge between native code and UI element responsible for displaying the web page. (Usually called a WebView.) It’s possible to use some native features, such as accelerometer, camera or compass. Lower level features are available too: Files, media, storage, notifications. 
 
-Second is related to the way user perceive software. They are used to web applications being slow, laggy and unresponsive. Native applications, on the other hand, they perceive as fast and easy to use. Today it’s possible to build apps based on HTML5 (if built correctly), that are almost as good as native apps. When users are aware that they are dealing with a web application, not a native one, they expect the application to be slow and unresponsive, like they are used to with almost all web applications. 
+Second is related to the way user perceive software. They are used to web applications being slow and unresponsive. Native applications, on the other hand, they perceive as fast and easy to use. Today it’s possible to build apps based on HTML5 (if built correctly), that are almost as good as native apps. When users are aware that they are dealing with a web application, not a native one, they expect the application to be slow and unresponsive, like they are used to with almost all web applications. 
 
 Disguising a well-made web application as a native application may result into user believing they’re working with a native app, especially when the user is not too technical.
 
-A great example is recently released LinkedIn iPad application of which 95\% is built with HTML5 instead of native technologies. (Shown in Figure \ref{fig:linkedin}.) \citep{linkedin_ipad}
+An example is recently released LinkedIn iPad application of which 95\% is built with HTML5 instead of native technologies. (Shown in Figure \ref{fig:linkedin}.) \citep{linkedin_ipad}
 
 \begin{figure}[htbp]
   \centering
