@@ -25,13 +25,13 @@ Firebase \citep{firebase} is a product similar to Meteor. The key difference is 
 
 This allows using existing JavaScript applications written in other frameworks and adding Firebase data layer. The data binding is done by attaching callbacks to Firebase data layer. Existing application with its own custom UI logic first attaches a callback to be called when Firebase data changes, and then is notified of changes so it could display the current state.
 
-Another difference between Meteor and Firebase is that Firebase requires users to use their hosting to store the data. It is not open source and it does not provide a way to self-host the data. It is founded by YCombinator \citep{ycombinator} and other angel investors. It also does not provide a library for other than web platform.
+Another difference between Meteor and Firebase is that Firebase requires users to use their hosting to store the data. It is not open source and it does not provide a way to self-host the data. It is founded by YCombinator \citep{ycombinator} and it total it received 1.4 millions of dollars in founding. \citep{firebase_funding} It also does not provide a library for other than web platform.
 
 \subsection{Simperium}
 
 Simperium is a project that is very similar to Firebase. It also does not provide a whole JavaScript framework, only data layer.
 
-Similarly to Meteor and Firebase, Simperium provides real-time object synchronization. One very powerful difference is built-in operational transformation. \citep{ot} This allows sending only the portions of data that have changes which improves performance dramatically when dealing one larger objects. Also it adds automatic resolution of conflicts: If two users change one object, their both changes will be preserved.
+Similarly to Meteor and Firebase, Simperium provides real-time object synchronization. One very powerful difference is built-in operational transformation. \citep{ot} This allows sending only the portions of data that have changed, which improves performance dramatically when dealing with larger objects. Also it adds automatic resolution of conflicts: If two users change one object, their both changes will be preserved.
 
 Simperium also allows writing custom server logic. Programmers have to use the environment provided by Simperium. The server side hosting is still provided by Simperium. It is also founded by YCombinator \citep{ycombinator} and not open-source. 
 

@@ -81,13 +81,13 @@ The typical update message contains object identifier and its data. The message 
 
 \textbf{Application context} is class that manages application objects by providing methods such as create, update, change identifier or delete.
 
-It's job is to unify interfaces of different model layers where Atmosphere might be used. In the current version, the only model layer is the one of Spine framework, but this class provides portability to other environments by encapsulating framework-specific model-related code.
+Its job is to unify interfaces of different model layers where Atmosphere might be used. In the current version, the only model layer is the one of Spine framework, but this class provides portability to other environments by encapsulating framework-specific model-related code.
 
 \textbf{Meta context} manages meta information for each of application objects. It provides methods for finding meta objects for existing application objects, creating new ones, changing identifiers and updating meta attributes.
 
 The motivation for this class came from the original implementation of Atmosphere which was intended only for Cocoa applications. Cocoa uses SQLite to store application objects, so it is not possible to dynamically add attributes to the schema.
 
-Atmosphere needs some extra attributes, such as 'is changed' or 'is local only'. Therefore a new schema is used, where each item contains identifier of the application object and values for these meta attributes.
+Atmosphere needs some extra attributes, such as ``is changed'' or ``is local only''. Therefore a new schema is used, where each item contains identifier of the application object and values for these meta attributes.
 
 \subsection{JavaScript details}
 
@@ -103,13 +103,13 @@ At the time of writing, JavaScript implementation of Atmosphere is built on top 
 
 The library does not completely rely on Spine, instead it only utilizes its model layer. Furthermore, all the code that requires Spine is contained in one small file (application context), which can be easily rewritten for other client side frameworks and their own model layers.
 
-The implementation is written in CoffeeScript \citep{coffeescript}, which is a language that improves syntax of JavaScript by introducing many syntactic shortcuts such as semantic whitespace (inspired by Python) or accessing instance variables with the '@' sign. (inspired by Ruby).
+The implementation is written in CoffeeScript \citep{coffeescript}, which is a language that improves syntax of JavaScript by introducing many syntactic shortcuts such as semantic whitespace (inspired by Python) or accessing instance variables with the ``@'' sign. (inspired by Ruby).
 
 The classes in persistence and communication layers implement the basic roles of Atmosphere, while the Synchronizer class is the entry point for working with Atmosphere.
 
 The Spine integration contains shortcuts for calling Atmosphere methods directly from Spine models using the API users are already developers are already familiar with.
 
-JavaScript implementation uses Socket.IO \citep{socketio} client library for opening WebSocket connections. The library enables socket-like functionality in browsers that don't support WebSocket using long-polling or Adobe Flash.
+JavaScript implementation uses Socket.IO \citep{socketio} client library for opening WebSocket connections. The library enables socket-like functionality in browsers that do not support WebSocket using long-polling or Adobe Flash.
 
 \subsection{Cocoa details}
 

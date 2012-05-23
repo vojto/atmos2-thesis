@@ -4,7 +4,7 @@
 
 TaskDo \citep{taskdo} is a task manager application written using CoffeeScript \citep{coffeescript}, Spine \citep{spinejs} and Atmosphere. It features offline usage, synchronization with Google Tasks API \citep{google_tasks} and is bundled as application for Mac platform using MacGap. \citep{macgap}
 
-The strong point of TaskDo is its close resemblance to native application. It's bundled as one, it is very responsive, but the most imporant thing is that it uses local data, which are synced with Google Tasks API using Atmosphere.
+The strong point of TaskDo is its close resemblance to native application. TaskDo is bundled as one and it is highly responsive. This responsiveness is achieved by storing objects locally and synchronizing them with Google Tasks API using Atmosphere.
 
 \begin{figure}[htbp]
   \centering
@@ -13,7 +13,7 @@ The strong point of TaskDo is its close resemblance to native application. It's 
   \label{fig:taskdo}
 \end{figure}
 
-One of the problems during implementation was OAuth authentication. To successfully authenticate user, the OAuth2 protocol \citep{oauth} first requires redirection to provider's website. Then the user has to confirm that they want to share their application data with third party application. At the end of the authentication process the user is redirected back to the original application.
+One of the problems during implementation was OAuth authentication. To successfully authenticate user, the OAuth2 protocol \citep{oauth} first requires redirection to provider's website. Then the user has to confirm that they want to share their data with third party application. At the end of the authentication process the user is redirected back to the original application.
 
 \begin{figure}[ht!]
   \centering
@@ -26,7 +26,7 @@ Now the application is sent a session token, which has to be used with every sub
 
 Atmosphere provides a method for sending custom HTTP header with each request. TaskDo implements logic for completing the authentication process and then updates configuration for resource client to use the newly retrieved token with each request.
 
-The Google Tasks API also returns JSON in a slightly more complicated format. For this reason, Atmoshere allows configuration of the way data are extracted from the response.
+The Google Tasks API also returns JSON in a slightly more complicated format. For this reason, Atmosphere allows configuration of the way data are extracted from the response.
 
 \subsection{Edukit}
 \label{sec:edukit}
@@ -38,9 +38,11 @@ The Google Tasks API also returns JSON in a slightly more complicated format. Fo
 %   \label{fig:figures_Edukit}
 % \end{figure}
 
-Edukit is a data sharing platform intended for students. It features simple wiki-like pages, discussions and notifications. It helps students share and discuss knowledge. 
+Edukit is a data sharing platform intended for students. It features simple wiki-like pages, discussions and notifications. It helps students share and discuss knowledge.
 
-One of its key strengths is ease of use, the social aspect and the speed. Edukit is a very fast web application because of its minimal nature. But generating a new page with each action and delivering it to user can only be so fast. By using Atmosphere it was possible to go even further and make the application feel like a desktop application that provides instant response to almost every action made by user. 
+Edukit is an existing web application written in Ruby on Rails, not using Atmosphere. Edukit Beta is the new version that is written in JavaScript and uses Atmosphere to communicate with the API of the existing version.
+
+One of its key strengths is ease of use, the social aspect and the speed. Edukit is a very fast web application because of its minimal nature. But generating a new page with each action and delivering it to user can only be so fast. By using Atmosphere in Edukit Beta it was possible to go even further and make the application feel like a desktop application that provides instant response to almost every action made by user.
 
 \begin{figure}[htbp]
   \centering
@@ -51,7 +53,7 @@ One of its key strengths is ease of use, the social aspect and the speed. Edukit
 
 The new version of Edukit uses Spine.js and Atmosphere to create fully client-side web application, which stores data locally into the local storage of browser.
 
-Atmoshere synchronizes these local data with the REST API of the original Edukit in the background. There are no changes in the original application involved, only exposing the REST API. The result is that it is possible to use both applications, the old and the new one at the same time.
+Atmosphere synchronizes these local data with the REST API of the original Edukit in the background. There are no changes in the original application involved, only exposing the REST API. The result is that it is possible to use both applications, the old and the new one at the same time.
 
 \subsubsection{Real-time updates}
 
@@ -65,7 +67,7 @@ Edukit also utilizes the real-time notification server provided by Atmosphere as
 \end{figure}
 
 
-Since the Ruby application and the live notification server are running on the same machine, and the Atmosphere server is written in Node.js, there is almost no extra processing time for the original request. The result is ability to chat in real time with other users who are currently viewing the same topic.
+Since the Ruby application and the live notification server are running on the same machine, and the Atmosphere server is written in Node.js, there is almost no extra processing time for the original request. Thanks to non-blocking event-based API of Node.js, it is possible to allow access for many users at once without using multithreading. \citep{nodejs_book} The result is ability to chat in real time with other users who are currently viewing the same topic.
 
 \subsubsection{Failure recovery by using UUIDs}
 
@@ -77,7 +79,7 @@ This helps prevent the case of one local object being created two times on the s
 
 \subsection{Zone}
 
-Zone is an application for Mac that allows simple time tracking. At its first iteration the mission was to help people focus on their work by ``zoning in'', \citep{zone_app} which would make the toolbar icon purple, reminding user they're working.
+Zone is an application for Mac that allows simple time tracking. At its first iteration the mission was to help people focus on their work by ``zoning in'', \citep{zone_app} which would make the toolbar icon purple, reminding user they are working.
 
 At later iterations, a new feature was added: Overview of previous zones throughout the week. This feature would help users find their productive time of the day by letting them visualize how long they were able to focus without taking a break.
 

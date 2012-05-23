@@ -104,7 +104,7 @@ Another reason to use local storage and synchronization is that the application 
 
 Atmosphere provides a WebSocket-based notification system for realtime updating of objects. The source application can use this system by making HTTP request to the Atmosphere notification server. (More detailed description is in section \ref{sec:notification_server}.) There are two types of notifications.
 
-The first type is called \textbf{object update}. It's used to propagate an object update to a subset of connected clients. Such message contains object's attributes and list of users to send the notification to. Sending the object update message will cause connected clients to update their local object with the new attributes sent by the server. Using bindings or some other technique, the user interface is updated and user sees the new attributes in real time.
+The first type is called \textbf{object update}. It is used to propagate an object update to a subset of connected clients. Such message contains object's attributes and list of users to send the notification to. Sending the object update message will cause connected clients to update their local object with the new attributes sent by the server. Using bindings or some other technique, the user interface is updated and user sees the new attributes in real time.
 
 The second type is called \textbf{notification}. A notification contains custom object to be passed to the connected clients. Similarly, it contains list of clients to send the message to. 
 
@@ -112,7 +112,7 @@ A notification message will forward custom object to specified users. The client
 
 \subsubsection{Live updates}
 
-Notifications themselves don't suffice in all cases. Take as an example an application where multiple users would like to edit one page together. Once a change is made by one user, a notification could be sent to other users containing the whole page object.
+Notifications themselves do not suffice in all cases. Take as an example an application where multiple users would like to edit one page together. Once a change is made by one user, a notification could be sent to other users containing the whole page object.
 
 What happens if a page is very long? Sending the whole object would be infeasible. The solution for this problem is to send only the changes made, not the whole objects.
 

@@ -18,7 +18,7 @@ Since Atmosphere relies heavily on HTML5 features, some of them will be describe
 
 HTML5 is the new version of HTML with support for many new features. The following sections will go through these features, discuss their use and support in the web browsers. Another question is how these features fit with Atmosphere and what use can they be made of.
 
-One aspect of new HTML5 feature is the browser support. By using HTML5 there is increased chance that the application will not work correctly, or will not work at all for some users with outdated browsers. In an ideal solution, users with old browsers are informed that their browser is not supported and are not allowed to use the application at all. If the application is allowed to be used with unsupported browsers, users might think it's broken instead of upgrading their software.
+One aspect of new HTML5 feature is the browser support. By using HTML5 there is increased chance that the application will not work correctly, or will not work at all for some users with outdated browsers. In an ideal solution, users with old browsers are informed that their browser is not supported and are not allowed to use the application at all. If the application is allowed to be used with unsupported browsers, users might think it is broken instead of upgrading their software.
 
 Can be this problem solved in a more elegant manner? Is there any solution that would bring bring the new features to users with old browsers? That depends on what feature it is. For example, if the browser does not support WebSockets (which is a real situation – Android web browser does not support it.), then the push notifications should be disabled, but the application should work without them. That is of course the case if the application is not completely based on WebSockets. Atmosphere applies this concept of graceful degradation: If the WebSocket support is not present, it simply will not be used, but the application will still work through the REST interface as normal. \citep{javascript_bible_book}
 
@@ -56,7 +56,7 @@ Canvas is a HTML5 element that allows dynamic rendering of vector objects and bi
 
 WebGL is a JavaScript extension that allows generation of interactive 3D graphics by sending instructions directly to GPU. It is based on OpenGL ES 2.0. 
 
-In supported browsers, WebGL is automatically enabled if user hardware is compatible. WebGL is  supported in version 9.0 and newer of Google Chrome, 4.0 and newer of Mozilla Firefox, 5.1 and newer of Safari (altough Safari has WebGL disabled by default.) As of time of writing, it is not supported by Internet Explorer. 
+In supported browsers, WebGL is automatically enabled if user hardware is compatible. WebGL is  supported in version 9.0 and newer of Google Chrome, 4.0 and newer of Mozilla Firefox, 5.1 and newer of Safari (although Safari has WebGL disabled by default.) As of time of writing, it is not supported by Internet Explorer. 
 
 Atmosphere does not use this feature either.
 
@@ -88,7 +88,7 @@ Since not of these database is fully supported, Atmosphere does not use either. 
 
 Client-side SQL databases will be an interesting solution, and as they become a feature that is supported on all platforms Atmosphere will try to use them. For now the support is very limited and Atmosphere will rely on local storage instead.
 
-\subsubsection{Websockets}
+\subsubsection{WebSockets}
 
 WebSockets is an extension of HTTP protocol. WebSockets hide the low level networking to provide simple API for connecting and sending simple text messages. 
 
@@ -128,7 +128,7 @@ PhoneGap allows accessing native features of the device with JavaScript API. Thi
 
 Users are used to web applications being slow and unresponsive. Native applications, on the other hand, are perceived as fast and easy to use. Today it is possible to build applications based on HTML5, that are almost as good as native applications.
 
-PhoneGap and MacGap helps disguising a well-made web application as a native application, which may result into user believing they are working with a native app. When users are aware that they are dealing with a web application, not a native one, they expect the application to be slow and unresponsive, but on the other hand, when they believe it's a native application, they expect it to be fast.
+PhoneGap and MacGap helps disguising a well-made web application as a native application, which may result into user believing they are working with a native app. When users are aware that they are dealing with a web application, not a native one, they expect the application to be slow and unresponsive, but on the other hand, when they believe it is a native application, they expect it to be fast.
 
 An example is recently released LinkedIn iPad application of which 95\% is built with HTML5 instead of native technologies. (Shown in Figure \ref{fig:linkedin}.) \citep{linkedin_ipad}
 
