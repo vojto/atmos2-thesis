@@ -20,14 +20,14 @@ ResourceClient  = require('./resource_client')
 #
 # The main interface used mostly for configuration and management of the
 # synchronization.
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------
 
 class Synchronizer extends Spine.Module
   @include Spine.Events
 
   # Object lifecycle
-  # ---------------------------------------------------------------------------
-  
+  # ---------------------------------------------------------------
+
   constructor: (options) ->
     @messageClient = new MessageClient(this)
     @metaContext = new MetaContext()
@@ -39,7 +39,7 @@ class Synchronizer extends Spine.Module
     Synchronizer.res = @resourceClient
 
   # Resource interface
-  # ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------
 
   updateOrCreate: (uri, item) ->
     # Check for ID change
@@ -51,7 +51,7 @@ class Synchronizer extends Spine.Module
     @appContext.updateOrCreate(uri, item)
 
   # Resource interface
-  # ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------
 
   fetch: (params...) ->
     @resourceClient.fetch(params...)
@@ -72,7 +72,7 @@ class Synchronizer extends Spine.Module
     
 
   # Meta objects
-  # ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------
   
   markObjectChanged: (object) ->
     uri = @appContext.objectURI(object)
@@ -82,7 +82,7 @@ class Synchronizer extends Spine.Module
     @metaContext.markURISynced(uri)
   
   # Synchronization
-  # ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------
 
   setNeedsSync: ->
     @_needsSync = true
@@ -114,7 +114,7 @@ class Synchronizer extends Spine.Module
           @appContext.destroy(uri)
     
   # Auth
-  # ---------------------------------------------------------------------------  
+  # ---------------------------------------------------------------  
   
   setAuthKey: (key) ->
     @authKey = key
@@ -243,7 +243,7 @@ class MetaContext
       @store = store
   
   # Marking changes
-  # ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------
   
   # Marks object at URI as changed.
   markURIChanged: (uri) ->
@@ -280,7 +280,7 @@ class MetaContext
       @saveObject(object)
   
   # Getting changed objects
-  # ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------
   
   isURILocalOnly: (uri, callback) ->
     @objectAtURI uri, (object) ->
@@ -301,7 +301,7 @@ class MetaContext
       callback(changed)
   
   # Marking local/remote
-  # ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------
   
   markURISynced: (uri) ->
     @findOrCreateObjectAtURI uri, (object) =>
@@ -477,7 +477,7 @@ module.exports = ResourceClient
 #
 # This class is responsible for socket communication through messages, thus
 # the name, "Message" client.
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------
 
 class MessageClient
   constructor: (sync) ->
@@ -505,7 +505,7 @@ class MessageClient
     @socket.emit(type, content)
   
   # Messaging interface
-  # ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------
 
   parseNotification: (data) =>
     console.log 'notification: ', data
@@ -518,7 +518,7 @@ module.exports = MessageClient
 
 \begin{lstlisting}[caption=spine.coffee]
 # Atmosphere Spine Model Adapter
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------
 
 Spine       = require('spine')
 Atmosphere  = require('./synchronizer')
