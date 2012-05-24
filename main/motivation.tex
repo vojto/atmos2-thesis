@@ -68,8 +68,8 @@ That requires most of the logic (including fronted logic - logic responsible for
 
 This thesis does not explore all of the possible solutions of achieving this goal because there are many various options. Instead, Atmosphere assumes the developer has or is building a JavaScript application.
 
-Moving logic to the client side is a great improvement itself. Still there are the same problems as mentioned before. For example, TaskDo (one of Atmosphere-based applications, that were build along with the framework), provides an easy way to access user's tasks in Google Tasks. The simple interface consists of two screens: List of ``task lists'' and list of tasks in the list.
+Moving logic to the client side is already an improvement. But even with that, the problem mentioned before still exist.
 
-Without Atmosphere, clicking on a task list would result in a few seconds wait for the tasks inside to load. With Atmosphere, the data is already cached locally, so opening a task list is instant. TaskDo and other applications are described in section Case Study.
+For example, TaskDo (one of Atmosphere-based applications, that were built along with the framework), provides an easy way to access user's tasks in Google Tasks. The simple interface consists of two screens: List of ``task lists'' and list of tasks in the list. Without Atmosphere, clicking on a task list would result in a few seconds wait for the tasks inside to load. With Atmosphere, the data is already cached locally, so opening a task list is instant. TaskDo and other applications are described in section Case Study.
 
 The next problem with web applications is that there are no push notifications, unless the business domain explicitly requires them. (Such as a chat application, or a game.) For most applications, it's necessary to update objects  in real time between users, but it would make the application better.
