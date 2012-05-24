@@ -75,7 +75,7 @@ Resource client is also responsible for extracting data contained in the respons
 
 \textbf{Message client} is responsible for opening and maintaining connection over WebSocket. Both JavaScript and Cocoa implementations use Socket.IO \citep{socketio}, a pseudo-protocol implemented on top of WebSocket.
 
-The typical update message contains object identifier and its data. The message client is responsible for updating the object with data contained in the message and it does so by calling appropriate method in the synchronizer class. Therefore message client remains a very lightweight class.
+The typical update message contains object identifier and its data. The message client is responsible for updating the object with data contained in the message and it does so by calling appropriate method in the synchronizer class. Therefore message client remains a lightweight class.
 
 \subsubsection{Persistence}
 

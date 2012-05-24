@@ -86,7 +86,7 @@ There is another solution, IndexedDB, which differs from WebSQL in API. Instead 
 
 Since not of these database is fully supported, Atmosphere does not use either. Instead, applications should execute complicated database requests on the server and use REST API to retrieve a subset of resources relevant to the user thus minimizing complexity of client-side database requests making key-value storage sufficient.
 
-Client-side SQL databases will be an interesting solution, and as they become a feature that is supported on all platforms Atmosphere will try to use them. For now the support is very limited and Atmosphere will rely on local storage instead.
+Client-side SQL databases will be an interesting solution, and as they become a feature that is supported on all platforms Atmosphere will try to use them. For now the browser support is limited and Atmosphere will rely on local storage instead.
 
 \subsubsection{WebSockets}
 
@@ -94,7 +94,7 @@ WebSockets is an extension of HTTP protocol. WebSockets hide the low level netwo
 
 WebSockets are most commonly used in web browsers, but not limited to. There are client libraries in languages such us Objective-C or Java, so they can be used in native iOS or Android applications.
 
-The server part can be written in any language. There are servers written in Ruby, PHP, Java and others. One server environment, Node.js, uses JavaScript as the server language. Thanks to Node.js it is possible to write server and client side (that utilizes WebSockets) in the same language with very similar API.
+The server part can be written in any language. There are servers written in Ruby, PHP, Java and others. One server environment, Node.js, uses JavaScript as the server language. Thanks to Node.js it is possible to write server and client side (that utilizes WebSockets) in the same language with a similar API.
 
 WebSockets are supported in all current browsers. For Atmosphere, that would be sufficient, because the application can work without WebSockets. Without WebSockets it would gracefully degrade to work without the notifications. But notifications work also without WebSockets by using Socket.IO. \citep{socketio}
 
@@ -153,7 +153,7 @@ Cocoa provides basic elements to build both desktop and mobile applications. On 
 
 The code is usually organized according to the MVC pattern. For the model layer, Core Data is used. Core Data is a library, that acts as persistence framework. The desktop version of Cocoa supports data bindings that automatically update interfaces elements according to changes to models. This feature significantly reduces glue code in the controllers.
 
-Another  very common pattern used by Cocoa is the observer pattern. Cocoa provides the notification center, which is an object, usually one for the application, that any objects can use to subscribe to notifications, or post notifications to. 
+Another common pattern used by Cocoa is the observer pattern. Cocoa provides the notification center, which is an object, usually one for the application, that any objects can use to subscribe to notifications, or post notifications to. 
 
 Objects that are to be stored using Core Data are called managed objects and are persisted into file or a database. Core Data manages attributes and relations of objects. Core Data uses fixed data schema which can be defined using a file or programatically. This is different from HTML5 as Core Data objects have fixed schema, and HTML5 are just objects serialized into key value storage. With Core Data it is possible to write more complicated applications with more complicated requests, because it can use SQLite as storage mechanism.
 

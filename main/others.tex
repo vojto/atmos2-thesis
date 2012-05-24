@@ -1,6 +1,6 @@
 \section{Other solutions}
 
-During the time of writing many new projects were released. Some of them are very similar to Atmosphere, others target wider range of problems.
+During the time of writing many new projects were released. Some of them are more similar to Atmosphere, others target wider range of problems.
 
 
 \subsection{Meteor}
@@ -29,9 +29,9 @@ Another difference between Meteor and Firebase is that Firebase requires users t
 
 \subsection{Simperium}
 
-Simperium is a project that is very similar to Firebase. It also does not provide a whole JavaScript framework, only data layer.
+Simperium is a project similar to Firebase. It also does not provide a whole JavaScript framework, only data layer.
 
-Similarly to Meteor and Firebase, Simperium provides real-time object synchronization. One very powerful difference is built-in operational transformation. \citep{ot} This allows sending only the portions of data that have changed, which improves performance dramatically when dealing with larger objects. Also it adds automatic resolution of conflicts: If two users change one object, their both changes will be preserved.
+Similarly to Meteor and Firebase, Simperium provides real-time object synchronization. One important difference is built-in operational transformation. \citep{ot} This allows sending only the portions of data that have changed, which improves performance dramatically when dealing with larger objects. Also it adds automatic resolution of conflicts: If two users change one object, their both changes will be preserved.
 
 Simperium also allows writing custom server logic. Programmers have to use the environment provided by Simperium. The server side hosting is still provided by Simperium. It is also founded by YCombinator \citep{ycombinator} and not open-source. 
 
@@ -57,9 +57,9 @@ Simperium also comes with a Cocoa framework for building iOS application. This f
 \end{table}
 
 
-Atmosphere is very similar to Simperium by a few key points: It provides custom server logic, real-time synchronization, Cocoa library and an option for offline usage.
+Atmosphere is similar to Simperium by a few key points: It provides custom server logic, real-time synchronization, Cocoa library and an option for offline usage.
 
-It is still very different from these frameworks in one aspect: It allows building applications that utilize and existing application with its REST API. All of the frameworks mentioned here require a whole new server-side application practically making developers rewrite their server code from scratch. (Or in worse case skip writing the server code.) Atmosphere is also open-source.
+Atmosphere is still different from these frameworks in one aspect: It allows building applications that utilize and existing application with its REST API. All of the frameworks mentioned here require a whole new server-side application practically making developers rewrite their server code from scratch. (Or in worse case skip writing the server code.) Atmosphere is also open-source.
 
 Because of this design decision Atmosphere cannot bring some features such as operational transformation for live editing. It would be impossible to implement it without drastically changing server code, which is one of the strong points of Atmosphere: It allows building real-time application with minimal change at the server side.
 
